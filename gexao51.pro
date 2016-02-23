@@ -14,7 +14,8 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         F_Principale.cpp \
-    salut.cpp
+    salut.cpp \
+    dommage.cpp
 
 HEADERS  += F_Principale.h \
     salut.h
