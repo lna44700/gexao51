@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        F_Principale.cpp
+        F_Principale.cpp \
+    salut.cpp
 
-HEADERS  += F_Principale.h
+HEADERS  += F_Principale.h \
+    salut.h
 
 FORMS    += F_Principale.ui
