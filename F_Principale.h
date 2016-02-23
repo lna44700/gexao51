@@ -2,7 +2,7 @@
 #define F_PRINCIPALE_H
 
 #include <QMainWindow>
-modifier
+
 namespace Ui {
 class F_Principale;
 }
