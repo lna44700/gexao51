@@ -7,6 +7,6 @@ int main(int argc, char *argv[])
     F_Principale w;
     w.show();
 
-    int hey;
+    int heyhey;
     return a.exec();
 }
