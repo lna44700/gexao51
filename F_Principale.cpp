@@ -11,5 +11,4 @@ F_Principale::F_Principale(QWidget *parent) :
 F_Principale::~F_Principale()
 {
     delete ui;
-
 }
