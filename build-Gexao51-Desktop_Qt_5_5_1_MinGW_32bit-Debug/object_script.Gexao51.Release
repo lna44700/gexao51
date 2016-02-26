@@ -1,0 +1,14 @@
+INPUT(
+./release\qextserialport.o
+./release\qextserialenumerator.o
+./release\qextserialport_win.o
+./release\qextserialenumerator_win.o
+./release\main.o
+./release\F_Principale.o
+./release\Arduino.o
+./release\F_Sonde.o
+./release\F_ChoisirSonde.o
+./release\moc_F_Principale.o
+./release\moc_F_Sonde.o
+./release\moc_F_ChoisirSonde.o
+);

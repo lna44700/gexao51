@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Gexao51
 TEMPLATE = app
 
+include(librairie\qextserialport\qextserialport.pri)
 
 SOURCES += main.cpp\
         F_Principale.cpp \
