@@ -2,6 +2,7 @@
 #define F_PRINCIPALE_H
 
 #include <QMainWindow>
+#include <QMdiArea>
 
 namespace Ui {
 class F_Principale;
@@ -17,6 +18,7 @@ public:
 
 private:
     Ui::F_Principale *ui;
+    QMdiArea *mdiArea;
 };
 
 #endif // F_PRINCIPALE_H

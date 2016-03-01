@@ -1,11 +1,14 @@
 #include "F_Principale.h"
 #include "ui_F_Principale.h"
+#include <QMdiArea>
 
 F_Principale::F_Principale(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::F_Principale)
 {
     ui->setupUi(this);
+    mdiArea = new QMdiArea();
+    setCentralWidget(mdiArea);
 }
 
 F_Principale::~F_Principale()

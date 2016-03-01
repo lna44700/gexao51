@@ -11,9 +11,25 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Gexao51</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QMdiArea" name="mdiArea">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>771</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="subwindow">
+     <property name="windowTitle">
+      <string>Sous fenêtre</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -23,8 +39,73 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFichier">
+    <property name="title">
+     <string>Fichier</string>
+    </property>
+    <addaction name="actionOuvrir"/>
+    <addaction name="actionSauvegarder"/>
+    <addaction name="actionChoix_des_sondes"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuitter"/>
+   </widget>
+   <widget class="QMenu" name="menuDonn_es">
+    <property name="title">
+     <string>Données</string>
+    </property>
+    <addaction name="actionExporter_les_donn_es"/>
+    <addaction name="actionSauvegarder_les_donn_es"/>
+   </widget>
+   <widget class="QMenu" name="menuAcquisition">
+    <property name="title">
+     <string>Acquisition</string>
+    </property>
+   </widget>
+   <addaction name="menuFichier"/>
+   <addaction name="menuDonn_es"/>
+   <addaction name="menuAcquisition"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOuvrir">
+   <property name="text">
+    <string>Ouvrir fichier de configuration</string>
+   </property>
+  </action>
+  <action name="actionSauvegarder">
+   <property name="text">
+    <string>Sauvegarder fichier de configuration</string>
+   </property>
+  </action>
+  <action name="actionAutomatique">
+   <property name="text">
+    <string>Automatique</string>
+   </property>
+  </action>
+  <action name="actionManuel">
+   <property name="text">
+    <string>Manuel</string>
+   </property>
+  </action>
+  <action name="actionExporter_les_donn_es">
+   <property name="text">
+    <string>Exporter les données</string>
+   </property>
+  </action>
+  <action name="actionSauvegarder_les_donn_es">
+   <property name="text">
+    <string>Sauvegarder les données</string>
+   </property>
+  </action>
+  <action name="actionChoix_des_sondes">
+   <property name="text">
+    <string>Choix des sondes</string>
+   </property>
+  </action>
+  <action name="actionQuitter">
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
