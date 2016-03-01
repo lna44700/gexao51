@@ -19,6 +19,7 @@ public:
 private:
     Ui::F_Principale *ui;
     QMdiArea *mdiArea;
+    MdiChild *createMdiChild();
 };
 
 #endif // F_PRINCIPALE_H

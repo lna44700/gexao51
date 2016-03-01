@@ -6,36 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>364</height>
+    <width>753</width>
+    <height>464</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Gexao51</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QMdiArea" name="mdiArea">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>771</width>
-      <height>301</height>
-     </rect>
-    </property>
-    <widget class="QWidget" name="subwindow">
-     <property name="windowTitle">
-      <string>Sous fenêtre</string>
-     </property>
-    </widget>
-   </widget>
-  </widget>
+  <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>753</width>
      <height>21</height>
     </rect>
    </property>
@@ -53,17 +37,19 @@
     <property name="title">
      <string>Données</string>
     </property>
+    <addaction name="actionAcquisition"/>
     <addaction name="actionExporter_les_donn_es"/>
     <addaction name="actionSauvegarder_les_donn_es"/>
    </widget>
-   <widget class="QMenu" name="menuAcquisition">
+   <widget class="QMenu" name="menuAide">
     <property name="title">
-     <string>Acquisition</string>
+     <string>Aide</string>
     </property>
+    <addaction name="actionA_propose"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuDonn_es"/>
-   <addaction name="menuAcquisition"/>
+   <addaction name="menuAide"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOuvrir">
@@ -104,6 +90,16 @@
   <action name="actionQuitter">
    <property name="text">
     <string>Quitter</string>
+   </property>
+  </action>
+  <action name="actionAcquisition">
+   <property name="text">
+    <string>Acquisition</string>
+   </property>
+  </action>
+  <action name="actionA_propose">
+   <property name="text">
+    <string>A propos</string>
    </property>
   </action>
  </widget>
