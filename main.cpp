@@ -9,8 +9,5 @@ int main(int argc, char *argv[])
     F_Principale w;
     w.show();
 
-
-
-
     return a.exec();
 }
