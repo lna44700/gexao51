@@ -14,16 +14,11 @@
    <string>Gexao51</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QMdiArea" name="mdiArea">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>0</y>
-      <width>200</width>
-      <height>160</height>
-     </rect>
-    </property>
-   </widget>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QMdiArea" name="mdiArea"/>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -38,11 +33,11 @@
     <property name="title">
      <string>Fichier</string>
     </property>
-    <addaction name="actionOuvrir"/>
-    <addaction name="actionSauvegarder"/>
-    <addaction name="actionChoix_des_sondes"/>
+    <addaction name="On_Ouvrir"/>
+    <addaction name="On_Sauvegarder"/>
+    <addaction name="On_Choix_Sondes"/>
     <addaction name="separator"/>
-    <addaction name="actionQuitter"/>
+    <addaction name="On_Quitter"/>
    </widget>
    <widget class="QMenu" name="menuDonn_es">
     <property name="title">
@@ -56,19 +51,19 @@
     <property name="title">
      <string>Aide</string>
     </property>
-    <addaction name="actionA_propose"/>
+    <addaction name="actionA_propos"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuDonn_es"/>
    <addaction name="menuAide"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionOuvrir">
+  <action name="On_Ouvrir">
    <property name="text">
     <string>Ouvrir fichier de configuration</string>
    </property>
   </action>
-  <action name="actionSauvegarder">
+  <action name="On_Sauvegarder">
    <property name="text">
     <string>Sauvegarder fichier de configuration</string>
    </property>
@@ -93,12 +88,12 @@
     <string>Sauvegarder les données</string>
    </property>
   </action>
-  <action name="actionChoix_des_sondes">
+  <action name="On_Choix_Sondes">
    <property name="text">
     <string>Choix des sondes</string>
    </property>
   </action>
-  <action name="actionQuitter">
+  <action name="On_Quitter">
    <property name="text">
     <string>Quitter</string>
    </property>
@@ -108,12 +103,82 @@
     <string>Acquisition</string>
    </property>
   </action>
-  <action name="actionA_propose">
+  <action name="actionA_propos">
    <property name="text">
-    <string>A propos</string>
+    <string>À propos</string>
    </property>
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>On_Quitter</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>376</x>
+     <y>231</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAcquisition</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>createChild()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>376</x>
+     <y>231</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionA_propos</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>displayAbout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>376</x>
+     <y>231</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>On_Choix_Sondes</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>displaySelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>376</x>
+     <y>231</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>displayAbout()</slot>
+  <slot>createChild()</slot>
+  <slot>displaySelection()</slot>
+ </slots>
 </ui>

@@ -13,170 +13,82 @@
   <property name="windowTitle">
    <string>Acquisition</string>
   </property>
-  <widget class="QTableView" name="TableurValeurs">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>10</y>
-     <width>231</width>
-     <height>271</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="BtnLancer">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>300</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Lancer</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="BtnStopper">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>300</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Stopper</string>
-   </property>
-  </widget>
-  <widget class="QLCDNumber" name="Valeur">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>30</y>
-     <width>131</width>
-     <height>41</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="BtnAcquisition">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>100</y>
-     <width>81</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Automatique</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="LabelValeur">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>10</y>
-     <width>81</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Valeur</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="TexteTempsAcqui">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>150</y>
-     <width>131</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="LabelTempsAcqui">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>130</y>
-     <width>141</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Temps d'acquisition (minute)</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="LabelIntervalle">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>180</y>
-     <width>111</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Durée entre 2 mesures</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="TexteIntervalle">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>200</y>
-     <width>131</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QTimeEdit" name="HeureAcquisition">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>280</y>
-     <width>131</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QDateEdit" name="DateAcquisition">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>250</y>
-     <width>131</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="LabelDateHeure">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>230</y>
-     <width>121</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Date et heure du début</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBox">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>80</y>
-     <width>141</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Visualisation uniquement</string>
-   </property>
-  </widget>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="2" column="0">
+    <widget class="QCheckBox" name="checkBox">
+     <property name="text">
+      <string>Visualisation uniquement</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QToolButton" name="BtnAcquisition">
+     <property name="text">
+      <string>Automatique</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" rowspan="10" colspan="2">
+    <widget class="QTableView" name="TableurValeurs"/>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="LabelIntervalle">
+     <property name="text">
+      <string>Durée entre 2 mesures</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="LabelDateHeure">
+     <property name="text">
+      <string>Date et heure du début</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0">
+    <widget class="QTimeEdit" name="HeureAcquisition"/>
+   </item>
+   <item row="10" column="2">
+    <widget class="QPushButton" name="BtnStopper">
+     <property name="text">
+      <string>Stopper</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLCDNumber" name="Valeur"/>
+   </item>
+   <item row="10" column="1">
+    <widget class="QPushButton" name="BtnLancer">
+     <property name="text">
+      <string>Lancer</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="LabelTempsAcqui">
+     <property name="text">
+      <string>Temps d'acquisition (minute)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLineEdit" name="TexteTempsAcqui"/>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLineEdit" name="TexteIntervalle"/>
+   </item>
+   <item row="9" column="0">
+    <widget class="QDateEdit" name="DateAcquisition"/>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="LabelValeur">
+     <property name="text">
+      <string>Valeur</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

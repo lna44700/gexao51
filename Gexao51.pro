@@ -17,12 +17,14 @@ SOURCES += main.cpp\
         F_Principale.cpp \
     Arduino.cpp \
     F_Sonde.cpp \
-    F_ChoisirSonde.cpp
+    F_ChoisirSonde.cpp \
+    fenetreenfant.cpp
 
 HEADERS  += F_Principale.h \
     Arduino.h \
     F_Sonde.h \
-    F_ChoisirSonde.h
+    F_ChoisirSonde.h \
+    fenetreenfant.h
 
 FORMS    += \
     F_Principale.ui \
