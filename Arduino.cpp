@@ -162,12 +162,21 @@ int Arduino::LireCapteur(QString Commande)
 
         CopieDonneesLues = DonneesLues;
         DonneesLues.resize(1);
-        PoidsFaible = DonneesLues.toInt(0,10);
 
-        CopieDonneesLues = CopieDonneesLues.remove(0,2);
-        PoidsFort = CopieDonneesLues.toInt(0,10);
+        if(DonneesLues == "-")
+        {
+            Retour = (-1);
+        }
+        else
+        {
+            PoidsFaible = DonneesLues.toInt(0,10);
 
-        Retour = ((PoidsFaible*256)+PoidsFort);
+            CopieDonneesLues = CopieDonneesLues.remove(0,2);
+            PoidsFort = CopieDonneesLues.toInt(0,10);
+
+            Retour = ((PoidsFaible*256)+PoidsFort);
+        }
+
     }
 
     return Retour;
