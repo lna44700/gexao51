@@ -18,8 +18,6 @@ public:
 
 private:
     Ui::F_Principale *ui;
-    //QMdiArea *mdiArea;
-    //MdiChild *createMdiChild();
 
 public slots:
     void displayAbout();
