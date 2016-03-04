@@ -39,7 +39,7 @@
     <addaction name="separator"/>
     <addaction name="actionQuitter"/>
    </widget>
-   <widget class="QMenu" name="menuDonn_es">
+   <widget class="QMenu" name="menuDonnees">
     <property name="title">
      <string>Données</string>
     </property>
@@ -54,7 +54,7 @@
     <addaction name="actionAPropos"/>
    </widget>
    <addaction name="menuFichier"/>
-   <addaction name="menuDonn_es"/>
+   <addaction name="menuDonnees"/>
    <addaction name="menuAide"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

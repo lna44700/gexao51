@@ -2,22 +2,29 @@
 #include "qextserialPort.h"
 #include "qextserialenumerator.h"
 #include <QDebug>
+#include <QString>
 
 Arduino::Arduino():
-    Port(NULL)
+    Port(NULL),
+    Buffer("")
 {
 
 }
 
 Arduino::~Arduino()
 {
-
+    this->Port=NULL;
+    this->Buffer="";
 }
 
 bool Arduino::Ouvrir()
 {
-    //Création de la variable de retour de la foction
+
+    //Création de la variable de retour de la fonction
     bool bRetour (false);
+
+    //Création de la variable qui permet de tester si un arduino a été détecté
+    bool ArduinoPresent(false);
 
     //L'objet mentionnant les infos des ports série
     QextSerialEnumerator enumerateur;
@@ -30,6 +37,8 @@ bool Arduino::Ouvrir()
         {
             if(Ports[i].vendorID == 0x2341)    //Si un port avec un VID de 0x2341 l'Arduino est détecté
             {
+                ArduinoPresent = true;  //La variable prend la valeur true si un arduino est détecté
+
                 this->NomPort = Ports[i].portName;    //NomPort est complété par le numéro de port de l'Arduino
 
                 //L'objet Port série
@@ -57,10 +66,12 @@ bool Arduino::Ouvrir()
                     qDebug() << "La connexion avec l'arduino à échouée";
                 }
             }
-            else
-            {
-                qDebug() << "Aucun arduino n'a été détecté";
-            }
+        }
+
+        //Vérification de la détection d'un arduino
+        if(ArduinoPresent == false)
+        {
+            qDebug() << "Aucun arduino n'a été détecté";
         }
 
     return bRetour;
@@ -101,10 +112,9 @@ void Arduino::EcrirePort(QString Commande)
 
 QByteArray Arduino::LirePort()
 {
-
     if(this->Port->isOpen() == true)
     {
-        this->Buffer=Port->readAll();
+        this->Buffer+=Port->readAll();
     }
     else
     {
@@ -112,4 +122,53 @@ QByteArray Arduino::LirePort()
     }
 
     return this->Buffer;
+}
+
+int Arduino::LireCapteur(QString Commande)
+{
+    while(Buffer.isEmpty()!=true)
+    {
+        Buffer.clear();
+    }
+    int Retour(0);
+
+    QString DonneesLues("");
+
+    //Récupération des premiers caractères de la commande afin de définir quelle type d'entrée est à lire
+    QString TypeEntree("");
+    TypeEntree = Commande;
+    TypeEntree.resize(1);
+
+    //Type d'entrée Jack ou I2C
+    this->EcrirePort(Commande);
+
+    while(this->LirePort().right(1)!="\n")
+    {
+        this->RetourLecturePort = this->LirePort();
+    }
+    qDebug() << RetourLecturePort;
+    DonneesLues += RetourLecturePort;
+    DonneesLues = DonneesLues.remove(0,6);
+    DonneesLues.resize(DonneesLues.size()-2);
+
+    Retour = DonneesLues.toInt(0,10);
+
+    //Type d'entrée I2C seulement
+    if(TypeEntree == "i")
+    {
+        QString CopieDonneesLues("");
+        int PoidsFort(0);
+        int PoidsFaible(0);
+
+        CopieDonneesLues = DonneesLues;
+        DonneesLues.resize(1);
+        PoidsFaible = DonneesLues.toInt(0,10);
+
+        CopieDonneesLues = CopieDonneesLues.remove(0,2);
+        PoidsFort = CopieDonneesLues.toInt(0,10);
+
+        Retour = ((PoidsFaible*256)+PoidsFort);
+    }
+
+    return Retour;
 }

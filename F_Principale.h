@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QMdiArea>
+#include "Arduino.h"
 
 namespace Ui {
 class F_Principale;
@@ -18,6 +19,8 @@ public:
 
 private:
     Ui::F_Principale *ui;
+    Arduino *oMonArduino;
+    int DonneesLues;
 
 public slots:
     void displayAbout();

@@ -1,7 +1,5 @@
 #include "F_Principale.h"
 #include <QApplication>
-#include <QMdiArea>
-#include "F_Sonde.h"
 
 int main(int argc, char *argv[])
 {
