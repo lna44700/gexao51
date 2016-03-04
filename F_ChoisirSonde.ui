@@ -13,39 +13,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTextBrowser" name="textBrowser">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>271</width>
-     <height>411</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>680</x>
-     <y>30</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Test</string>
-   </property>
-  </widget>
-  <widget class="QCalendarWidget" name="calendarWidget">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>20</y>
-     <width>296</width>
-     <height>183</height>
-    </rect>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections/>
