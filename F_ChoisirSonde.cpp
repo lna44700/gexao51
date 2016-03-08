@@ -1,7 +1,7 @@
 #include "F_ChoisirSonde.h"
 #include "ui_F_ChoisirSonde.h"
 
-F_ChoisirSonde::F_ChoisirSonde(QWidget *parent) :
+F_ChoisirSonde::F_ChoisirSonde(Arduino *oMonArduino, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::F_ChoisirSonde)
 {
