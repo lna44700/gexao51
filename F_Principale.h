@@ -16,16 +16,19 @@ class F_Principale : public QMainWindow
 public:
     explicit F_Principale(QWidget *parent = 0);
     ~F_Principale();
+    Arduino *oMonArduino;
 
 private:
     Ui::F_Principale *ui;
-    Arduino *oMonArduino;
     int DonneesLues;
+
+
 
 public slots:
     void displayAbout();
     void createChild();
     void displaySelection();
+
 };
 
 #endif // F_PRINCIPALE_H

@@ -13,7 +13,7 @@
 F_Principale::F_Principale(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::F_Principale),
-    DonneesLues(0)
+    DonneesLues(0)//à enlever quand f_sonde sera terminée
 {
     ui->setupUi(this);
 
@@ -40,17 +40,16 @@ void F_Principale::displayAbout() //action qui affiche un message en pop-up
     tr("<p>Ce logiciel a été développé par Sylvain GUICHARD et Sylvain MENARD, étudiants au Lycée Nicolas Appert à Orvault.</p>")); // le message qui doit s'afficher
 }
 
-void F_Principale::createChild() // création de la fenêtre enfant
+void F_Principale::createChild() //action de création de la fenêtre enfant
 {
-    F_Sonde *f_sonde = new F_Sonde(ui->mdiArea); // création d'une variable de type f_sonde
+    F_Sonde *f_sonde = new F_Sonde(this->oMonArduino, static_cast<QWidget*>(ui->mdiArea)); // création d'une variable de type f_sonde
     f_sonde->setAttribute(Qt::WA_DeleteOnClose); //detruit le widget lors de la fermeture de l'évenement
     ui->mdiArea->addSubWindow(f_sonde); // ajoute la fenêtre enfant f_sonde à la fenêtre MDI
     f_sonde->show(); // affiche la fenêtre enfant
 }
 
-void F_Principale::displaySelection()
+void F_Principale::displaySelection()//action d'affichage fenêtre de séléction des sondes
 {
-
     F_ChoisirSonde *f_choix = new F_ChoisirSonde ;
     f_choix->show();
 }

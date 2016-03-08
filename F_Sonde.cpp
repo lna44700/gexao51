@@ -1,23 +1,40 @@
 #include "F_Sonde.h"
 #include "ui_F_Sonde.h"
 #include <QDate>
-#include <QString>
 #include <QTime>
+#include <QValidator>
+#include "Arduino.h"
+#include <fstream>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-F_Sonde::F_Sonde(QWidget *parent) :
+using namespace std;
+
+F_Sonde::F_Sonde(Arduino *oMonArduino, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::F_Sonde)
 {
     ui->setupUi(this);
+    this->oArduino = oMonArduino;
 
+    //Affiche la date actuelle par défaut
     QDate date = QDate::currentDate();
     ui->deDateAcquisition->setDate(date);
 
+    //Affiche l'heure actuelle par défaut
     QTime heure = QTime::currentTime();
     ui->tiHeureAcquisition->setTime(heure);
 
+    //Indications d'écriture dans les champs d'entrée
     ui->leTpsAcquisition->setPlaceholderText("en minutes");
     ui->leIntervalle->setPlaceholderText("en secondes");
+
+    QValidator *ValidatorIntervalle = new QIntValidator(1, 9999, this);
+    ui->leIntervalle->setValidator(ValidatorIntervalle);
+    QValidator *ValidatorTpsMesure = new QIntValidator(1, 9999, this);
+    ui->leTpsAcquisition->setValidator(ValidatorTpsMesure);
 }
 
 F_Sonde::~F_Sonde()
@@ -27,9 +44,9 @@ F_Sonde::~F_Sonde()
 
 void F_Sonde::on_btnModeAcquisition_clicked()
 {
-    QString sIndication("en minutes");
-    if (ui->btnModeAcquisition->text() == "Automatique")
+    if (ui->btnModeAcquisition->text() == "Automatique")//Si le texte du bouton est 'Automatique'
     {
+        //Si choix de l'acquisition en automatique, rend non visibles les objets graphiques et change du texte du bouton
         ui->btnModeAcquisition->setText("Manuel");
         ui->tlTpsAcquisition->hide();
         ui->leTpsAcquisition->hide();
@@ -40,8 +57,9 @@ void F_Sonde::on_btnModeAcquisition_clicked()
         ui->tiHeureAcquisition->hide();
 
     }
-    else if (ui->btnModeAcquisition->text() == "Manuel")
+    else if (ui->btnModeAcquisition->text() == "Manuel")//Si le texte du bouton est 'Manuel'
     {
+        //Si choix de l'acquisition en manuel, affichage des objets graphiques et changement du texte du bouton
         ui->btnModeAcquisition->setText("Automatique");
         ui->tlTpsAcquisition->show();
         ui->leTpsAcquisition->show();
@@ -55,8 +73,49 @@ void F_Sonde::on_btnModeAcquisition_clicked()
 
 void F_Sonde::on_cbModeVisualisation_toggled(bool checked)
 {
-    if (checked == true)
-    {
-        // desactiver le tableau
+    if (checked == true)//Si mode visualisation coché, on désactive les différents objets graphiques
+    { 
+        ui->tvValeurs->setEnabled(false);
+        ui->leTpsAcquisition->setEnabled(false);
+        ui->leIntervalle->setEnabled(false);
+        ui->deDateAcquisition->setEnabled(false);
+        ui->tiHeureAcquisition->setEnabled(false);
+        ui->btnLancer->setEnabled(false);
+        ui->btnStopper->setEnabled(false);
     }
+    else if (checked == false)//Si mode visualisation décoché, on les réactives
+    {
+        ui->tvValeurs->setEnabled(true);
+        ui->leTpsAcquisition->setEnabled(true);
+        ui->leIntervalle->setEnabled(true);
+        ui->deDateAcquisition->setEnabled(true);
+        ui->tiHeureAcquisition->setEnabled(true);
+        ui->btnLancer->setEnabled(true);
+        ui->btnStopper->setEnabled(true);
+
+    }
+}
+
+void F_Sonde::on_btnLancer_clicked()
+{
+    int test(0);
+
+    /*while(ui->btnStopper-> != true)
+    {
+        test = this->oArduino->LireCapteur("iR01602");
+        sleep(1);
+        ui->lcdValeur->display(test);
+    }
+    /*if (ui->cbModeVisualisation->isChecked() == false)
+    {
+        ofstream file ("Test.csv", ios::out);
+        file << test << ";" << test << endl;
+
+    }*/
+
+}
+
+void F_Sonde::on_btnStopper_clicked(bool checked)
+{
+
 }

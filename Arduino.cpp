@@ -139,6 +139,11 @@ int Arduino::LireCapteur(QString Commande)
     TypeEntree = Commande;
     TypeEntree.resize(1);
 
+
+
+
+
+
     //Type d'entrée Jack ou I2C
     this->EcrirePort(Commande);
 
@@ -146,7 +151,11 @@ int Arduino::LireCapteur(QString Commande)
     {
         this->RetourLecturePort = this->LirePort();
     }
-    qDebug() << RetourLecturePort;
+
+
+
+
+
     DonneesLues += RetourLecturePort;
     DonneesLues = DonneesLues.remove(0,6);
     DonneesLues.resize(DonneesLues.size()-2);
@@ -178,6 +187,8 @@ int Arduino::LireCapteur(QString Commande)
         }
 
     }
+    qDebug() << Retour;
+
 
     return Retour;
 }
