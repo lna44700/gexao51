@@ -50,6 +50,6 @@ void F_Principale::createChild() //action de création de la fenêtre enfant
 
 void F_Principale::displaySelection()//action d'affichage fenêtre de séléction des sondes
 {
-    F_ChoisirSonde *f_choix = new F_ChoisirSonde ;
+    F_ChoisirSonde *f_choix = new F_ChoisirSonde(this->oMonArduino) ;
     f_choix->show();
 }
