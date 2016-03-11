@@ -11,6 +11,7 @@
 #include <Arduino.h>
 #include <QPixmap>
 #include <QLabel>
+#include <QFileDialog>
 
 F_Principale::F_Principale(QWidget *parent) :
     QMainWindow(parent),
@@ -88,4 +89,19 @@ void F_Principale::displaySelection()//action d'affichage fenêtre de séléctio
 {
     F_ChoisirSonde *f_choix = new F_ChoisirSonde(this->oMonArduino) ;
     f_choix->show();
+}
+
+void F_Principale::on_actionHeureDatePartout_triggered()
+{
+
+}
+
+void F_Principale::on_actionOuvrir_triggered()
+{
+    QString fichier = QFileDialog::getOpenFileName(this, "Ouvrir les paramètres d'acquisition", QString(), "Fichier de paramètre (*.ini)");
+}
+
+void F_Principale::on_actionSauvegarder_triggered()
+{
+    QString fichier = QFileDialog::getSaveFileName(this, "Enregistrer les paramètres d'acquisition", QString(), "Fichier de paramètre (*.ini)");
 }

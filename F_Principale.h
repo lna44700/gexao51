@@ -29,6 +29,10 @@ public slots:
     void createChild();
     void displaySelection();
 
+private slots:
+    void on_actionHeureDatePartout_triggered();
+    void on_actionOuvrir_triggered();
+    void on_actionSauvegarder_triggered();
 };
 
 #endif // F_PRINCIPALE_H
