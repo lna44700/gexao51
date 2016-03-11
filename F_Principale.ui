@@ -59,8 +59,17 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="windowTitle">
     <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -69,15 +78,17 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionLancerTous"/>
+   <addaction name="actionStopperTous"/>
+   <addaction name="actionHeureDatePartout"/>
   </widget>
   <action name="actionOuvrir">
    <property name="text">
-    <string>Ouvrir fichier de configuration</string>
+    <string>Ouvrir paramètres d'acquisition</string>
    </property>
   </action>
   <action name="actionSauvegarder">
    <property name="text">
-    <string>Sauvegarder fichier de configuration</string>
+    <string>Sauvegarder paramètres d'acquisition</string>
    </property>
   </action>
   <action name="actionAutomatique">
@@ -121,12 +132,36 @@
    </property>
   </action>
   <action name="actionLancerTous">
+   <property name="icon">
+    <iconset resource="ressourcegexao51.qrc">
+     <normaloff>:/new/prefix1/start_all.ico</normaloff>:/new/prefix1/start_all.ico</iconset>
+   </property>
    <property name="text">
-    <string>Lancer</string>
+    <string>Lancer toutes les sondes</string>
+   </property>
+  </action>
+  <action name="actionStopperTous">
+   <property name="icon">
+    <iconset resource="ressourcegexao51.qrc">
+     <normaloff>:/new/prefix1/stop_all.ico</normaloff>:/new/prefix1/stop_all.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Stopper toutes les sondes</string>
+   </property>
+  </action>
+  <action name="actionHeureDatePartout">
+   <property name="icon">
+    <iconset resource="ressourcegexao51.qrc">
+     <normaloff>:/new/prefix1/date_clock.ico</normaloff>:/new/prefix1/date_clock.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Appliquer la même heure et date sur toutes les sondes</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="ressourcegexao51.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actionQuitter</sender>

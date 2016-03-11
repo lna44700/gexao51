@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>clock.ico</file>
+        <file>date_clock.ico</file>
+        <file>led_rouge_red.ico</file>
+        <file>led_verte_red.ico</file>
+        <file>start.ico</file>
+        <file>start_all.ico</file>
+        <file>stop.ico</file>
+        <file>stop_all.ico</file>
+    </qresource>
+</RCC>

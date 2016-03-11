@@ -9,13 +9,20 @@
 #include <QMessageBox>
 #include <unistd.h>
 #include <Arduino.h>
+#include <QPixmap>
+#include <QLabel>
 
 F_Principale::F_Principale(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::F_Principale),
     DonneesLues(0)//à enlever quand f_sonde sera terminée
-{
+{ 
     ui->setupUi(this);
+
+    QLabel *iconLbl = new QLabel;
+    QLabel *texteLbl = new QLabel;
+    QPixmap IconeVert("D:/Cours/BTS/Projet/gexao51/led_verte_red.ico");
+    QPixmap IconeRouge("D:/Cours/BTS/Projet/gexao51/led_rouge_red.ico");
 
     this->oMonArduino = new Arduino;
 
@@ -27,6 +34,28 @@ F_Principale::F_Principale(QWidget *parent) :
 
     this->DonneesLues = oMonArduino->LireCapteur("A10");
     qDebug() << this->DonneesLues;*/
+
+    if(this->oMonArduino->Ouvrir() == true)
+    {
+        iconLbl->setPixmap(IconeVert);
+        texteLbl->setText("Arduino détectée !");
+        ui->statusBar->addWidget(iconLbl);
+        ui->statusBar->addWidget(texteLbl);
+    }
+    else
+    {
+        iconLbl->setPixmap(IconeRouge);
+        texteLbl->setText("Arduino non détectée !");
+        ui->statusBar->addWidget(iconLbl);
+        ui->statusBar->addWidget(texteLbl);
+    }
+
+    //Ajout de la led de détection de l'Arduino
+
+    /*iconLbl->setPixmap(pix);
+    texteLbl->setText("Arduino détectée !");
+    ui->statusBar->addWidget(iconLbl);
+    ui->statusBar->addWidget(texteLbl);*/
 }
 
 F_Principale::~F_Principale()

@@ -28,18 +28,25 @@ F_Sonde::F_Sonde(Arduino *oMonArduino, QWidget *parent) :
 
     //Indications d'écriture dans les champs d'entrée
     ui->leTpsAcquisition->setPlaceholderText("en minutes");
-    ui->leIntervalle->setPlaceholderText("en secondes");
+    //ui->leIntervalle->setPlaceholderText("en secondes");
 
-    QValidator *ValidatorIntervalle = new QIntValidator(1, 9999, this);
-    ui->leIntervalle->setValidator(ValidatorIntervalle);
+    //Valide uniquement des chiffres de 1 à 9999
+    //QValidator *ValidatorIntervalle = new QIntValidator(1, 9999, this);
+    //ui->leIntervalle->setValidator(ValidatorIntervalle);
     QValidator *ValidatorTpsMesure = new QIntValidator(1, 9999, this);
     ui->leTpsAcquisition->setValidator(ValidatorTpsMesure);
 
-    /*QIcon icon;
-    icon.addFile("test.ico", QSize(65,65), QIcon::Normal, QIcon::On);*/
-    ui->btnLancer->setIcon(QIcon(":/new/prefix1/test.ico"));
-    ui->btnLancer->setIconSize(QSize(65,65));
+    //Met l'icone sur le bouton lancer
+    ui->btnLancer->setText("");
+    ui->btnLancer->setIcon(QIcon(":/new/prefix1/start.ico"));
+    ui->btnLancer->setIconSize(QSize(30,30));
     ui->btnLancer->setCheckable(true);
+
+    //Met l'icone sur le bouton stopper
+    ui->btnStopper->setText("");
+    ui->btnStopper->setIcon(QIcon(":/new/prefix1/stop.ico"));
+    ui->btnStopper->setIconSize(QSize(30,30));
+    ui->btnStopper->setCheckable(true);
 
 
 }
@@ -58,7 +65,7 @@ void F_Sonde::on_btnModeAcquisition_clicked()
         ui->tlTpsAcquisition->hide();
         ui->leTpsAcquisition->hide();
         ui->tlIntervalle->hide();
-        ui->leIntervalle->hide();
+        ui->spIntervalle->hide();
         ui->tlDateHeure->hide();
         ui->deDateAcquisition->hide();
         ui->tiHeureAcquisition->hide();
@@ -71,7 +78,7 @@ void F_Sonde::on_btnModeAcquisition_clicked()
         ui->tlTpsAcquisition->show();
         ui->leTpsAcquisition->show();
         ui->tlIntervalle->show();
-        ui->leIntervalle->show();
+        ui->spIntervalle->show();
         ui->tlDateHeure->show();
         ui->deDateAcquisition->show();
         ui->tiHeureAcquisition->show();
@@ -84,7 +91,7 @@ void F_Sonde::on_cbModeVisualisation_toggled(bool checked)
     { 
         ui->tvValeurs->setEnabled(false);
         ui->leTpsAcquisition->setEnabled(false);
-        ui->leIntervalle->setEnabled(false);
+        ui->spIntervalle->setEnabled(false);
         ui->deDateAcquisition->setEnabled(false);
         ui->tiHeureAcquisition->setEnabled(false);
         ui->btnLancer->setEnabled(false);
@@ -94,7 +101,7 @@ void F_Sonde::on_cbModeVisualisation_toggled(bool checked)
     {
         ui->tvValeurs->setEnabled(true);
         ui->leTpsAcquisition->setEnabled(true);
-        ui->leIntervalle->setEnabled(true);
+        ui->spIntervalle->setEnabled(true);
         ui->deDateAcquisition->setEnabled(true);
         ui->tiHeureAcquisition->setEnabled(true);
         ui->btnLancer->setEnabled(true);

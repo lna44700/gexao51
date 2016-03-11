@@ -32,4 +32,4 @@ FORMS    += \
 DISTFILES +=
 
 RESOURCES += \
-    ressourcegexao51.qrc
+    icones.qrc
