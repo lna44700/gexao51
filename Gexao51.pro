@@ -28,3 +28,8 @@ FORMS    += \
     F_Principale.ui \
     F_Sonde.ui \
     F_ChoisirSonde.ui
+
+DISTFILES +=
+
+RESOURCES += \
+    ressourcegexao51.qrc

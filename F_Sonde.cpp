@@ -6,9 +6,8 @@
 #include "Arduino.h"
 #include <fstream>
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
+#include <QPixmap>
 
 using namespace std;
 
@@ -35,6 +34,14 @@ F_Sonde::F_Sonde(Arduino *oMonArduino, QWidget *parent) :
     ui->leIntervalle->setValidator(ValidatorIntervalle);
     QValidator *ValidatorTpsMesure = new QIntValidator(1, 9999, this);
     ui->leTpsAcquisition->setValidator(ValidatorTpsMesure);
+
+    /*QIcon icon;
+    icon.addFile("test.ico", QSize(65,65), QIcon::Normal, QIcon::On);*/
+    ui->btnLancer->setIcon(QIcon(":/new/prefix1/test.ico"));
+    ui->btnLancer->setIconSize(QSize(65,65));
+    ui->btnLancer->setCheckable(true);
+
+
 }
 
 F_Sonde::~F_Sonde()
@@ -98,18 +105,19 @@ void F_Sonde::on_cbModeVisualisation_toggled(bool checked)
 
 void F_Sonde::on_btnLancer_clicked()
 {
-    int test(0);
+    /*int test(0);
+    int i(0);
 
-    /*while(ui->btnStopper-> != true)
+    while(i < 5)
     {
-        test = this->oArduino->LireCapteur("iR01602");
-        sleep(1);
+        test = this->oArduino->LireCapteur("A10");
         ui->lcdValeur->display(test);
+        i++;
     }
-    /*if (ui->cbModeVisualisation->isChecked() == false)
+    if (ui->cbModeVisualisation->isChecked() == false)
     {
         ofstream file ("Test.csv", ios::out);
-        file << test << ";" << test << endl;
+        file << test << ";" << test << "\n" << endl;
 
     }*/
 

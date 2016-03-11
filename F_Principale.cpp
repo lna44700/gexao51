@@ -21,12 +21,12 @@ F_Principale::F_Principale(QWidget *parent) :
 
     this->oMonArduino->Ouvrir();
     sleep(1);
-
+/*
     //Lecture du port pour lire le nom
     this->oMonArduino->LirePort();
 
     this->DonneesLues = oMonArduino->LireCapteur("A10");
-    qDebug() << this->DonneesLues;
+    qDebug() << this->DonneesLues;*/
 }
 
 F_Principale::~F_Principale()
@@ -37,7 +37,7 @@ F_Principale::~F_Principale()
 void F_Principale::displayAbout() //action qui affiche un message en pop-up
 {
     QMessageBox::about(this, tr("À propos"),
-    tr("<p>Ce logiciel a été développé par Sylvain GUICHARD et Sylvain MENARD, étudiants au Lycée Nicolas Appert à Orvault.</p>")); // le message qui doit s'afficher
+    tr("<p>Ce logiciel a été développé par Sylvain GUICHARD et Sylvain MENARD, étudiants au Lycée Nicolas Appert à Orvault - Année 2016 - Version 0.01</p>")); // le message qui doit s'afficher
 }
 
 void F_Principale::createChild() //action de création de la fenêtre enfant

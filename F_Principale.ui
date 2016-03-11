@@ -57,7 +57,19 @@
    <addaction name="menuDonnees"/>
    <addaction name="menuAide"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionLancerTous"/>
+  </widget>
   <action name="actionOuvrir">
    <property name="text">
     <string>Ouvrir fichier de configuration</string>
@@ -106,6 +118,11 @@
   <action name="actionAPropos">
    <property name="text">
     <string>À propos</string>
+   </property>
+  </action>
+  <action name="actionLancerTous">
+   <property name="text">
+    <string>Lancer</string>
    </property>
   </action>
  </widget>
