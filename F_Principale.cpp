@@ -96,11 +96,13 @@ void F_Principale::on_actionHeureDatePartout_triggered()
 
 }
 
+//Fênetre d'ouverture des paramètres d'acquisition
 void F_Principale::on_actionOuvrir_triggered()
 {
     QString fichier = QFileDialog::getOpenFileName(this, "Ouvrir les paramètres d'acquisition", QString(), "Fichier de paramètre (*.ini)");
 }
 
+//Fenêtre de sauvegarde des paramètres d'acquisition
 void F_Principale::on_actionSauvegarder_triggered()
 {
     QString fichier = QFileDialog::getSaveFileName(this, "Enregistrer les paramètres d'acquisition", QString(), "Fichier de paramètre (*.ini)");
