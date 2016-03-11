@@ -62,10 +62,10 @@ void F_Sonde::on_btnModeAcquisition_clicked()
     {
         //Si choix de l'acquisition en automatique, rend non visibles les objets graphiques et change du texte du bouton
         ui->btnModeAcquisition->setText("Manuel");
-        ui->tlTpsAcquisition->hide();
+        /*ui->tlTpsAcquisition->hide();
         ui->leTpsAcquisition->hide();
         ui->tlIntervalle->hide();
-        ui->spIntervalle->hide();
+        ui->spIntervalle->hide();*/
         ui->tlDateHeure->hide();
         ui->deDateAcquisition->hide();
         ui->tiHeureAcquisition->hide();
@@ -75,17 +75,18 @@ void F_Sonde::on_btnModeAcquisition_clicked()
     {
         //Si choix de l'acquisition en manuel, affichage des objets graphiques et changement du texte du bouton
         ui->btnModeAcquisition->setText("Automatique");
-        ui->tlTpsAcquisition->show();
+        /*ui->tlTpsAcquisition->show();
         ui->leTpsAcquisition->show();
         ui->tlIntervalle->show();
-        ui->spIntervalle->show();
+        ui->spIntervalle->show();*/
         ui->tlDateHeure->show();
         ui->deDateAcquisition->show();
         ui->tiHeureAcquisition->show();
     }
 }
 
-void F_Sonde::on_cbModeVisualisation_toggled(bool checked)
+//-------------------A ENLEVER PLUS TARD-------------------
+/*void F_Sonde::on_cbModeVisualisation_toggled(bool checked)
 {
     if (checked == true)//Si mode visualisation coché, on désactive les différents objets graphiques
     { 
@@ -108,7 +109,8 @@ void F_Sonde::on_cbModeVisualisation_toggled(bool checked)
         ui->btnStopper->setEnabled(true);
 
     }
-}
+}*/
+//------------------------------------------------------------------------
 
 void F_Sonde::on_btnLancer_clicked()
 {

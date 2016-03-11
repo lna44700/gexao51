@@ -8,5 +8,7 @@
         <file>start_all.ico</file>
         <file>stop.ico</file>
         <file>stop_all.ico</file>
+        <file>icone_g_google.ico</file>
+        <file>icone_g_key.ico</file>
     </qresource>
 </RCC>

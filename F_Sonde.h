@@ -19,7 +19,7 @@ public:
 private slots:
     void on_btnModeAcquisition_clicked();
 
-    void on_cbModeVisualisation_toggled(bool checked);
+    //void on_cbModeVisualisation_toggled(bool checked);
 
     void on_btnLancer_clicked();
 

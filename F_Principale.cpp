@@ -19,10 +19,15 @@ F_Principale::F_Principale(QWidget *parent) :
 { 
     ui->setupUi(this);
 
+    //Ajout de l'icone de l'application
+    QIcon icon(":/new/prefix1/icone_g_key.ico");
+    QWidget::setWindowIcon(icon);
+
+    //Définition des icones et texte pour la détection de l'Arduino
     QLabel *iconLbl = new QLabel;
     QLabel *texteLbl = new QLabel;
-    QPixmap IconeVert("D:/Cours/BTS/Projet/gexao51/led_verte_red.ico");
-    QPixmap IconeRouge("D:/Cours/BTS/Projet/gexao51/led_rouge_red.ico");
+    QPixmap IconeVert(":/new/prefix1/led_verte_red.ico");
+    QPixmap IconeRouge(":/new/prefix1/led_rouge_red.ico");
 
     this->oMonArduino = new Arduino;
 
@@ -35,6 +40,7 @@ F_Principale::F_Principale(QWidget *parent) :
     this->DonneesLues = oMonArduino->LireCapteur("A10");
     qDebug() << this->DonneesLues;*/
 
+    //Ajout de la led de détection de l'Arduino - Vert si détection, rouge sinon
     if(this->oMonArduino->Ouvrir() == true)
     {
         iconLbl->setPixmap(IconeVert);
@@ -49,13 +55,6 @@ F_Principale::F_Principale(QWidget *parent) :
         ui->statusBar->addWidget(iconLbl);
         ui->statusBar->addWidget(texteLbl);
     }
-
-    //Ajout de la led de détection de l'Arduino
-
-    /*iconLbl->setPixmap(pix);
-    texteLbl->setText("Arduino détectée !");
-    ui->statusBar->addWidget(iconLbl);
-    ui->statusBar->addWidget(texteLbl);*/
 }
 
 F_Principale::~F_Principale()
@@ -66,7 +65,15 @@ F_Principale::~F_Principale()
 void F_Principale::displayAbout() //action qui affiche un message en pop-up
 {
     QMessageBox::about(this, tr("À propos"),
-    tr("<p>Ce logiciel a été développé par Sylvain GUICHARD et Sylvain MENARD, étudiants au Lycée Nicolas Appert à Orvault - Année 2016 - Version 0.01</p>")); // le message qui doit s'afficher
+    tr("<p>Ce logiciel a été développé par : <br/> Sylvain GUICHARD et Sylvain MENARD, étudiants au Lycée Nicolas Appert à Orvault "
+       "<br/> <br/> Remerciments pour les icones : "
+       "<br/> <a href=\"http://www.proglyphs.com/\">http://www.proglyphs.com/</a> "
+       "<br/> <a href=\"https://www.iconfinder.com/paomedia\">https://www.iconfinder.com/paomedia</a> "
+       "<br/> <a href=\"http://wefunction.com/\">http://wefunction.com/</a> "
+       "<br/> <a href=\"https://www.iconfinder.com/Chanut-is\">https://www.iconfinder.com/Chanut-is</a> "
+       "<br/> <a href=\"https://www.iconfinder.com/icons4android.com\">https://www.iconfinder.com/icons4android.com</a> "
+       "<br/> <br/> Année 2016 "
+       "<br/> <br/> Version 0.01</p>")); // le message qui doit s'afficher
 }
 
 void F_Principale::createChild() //action de création de la fenêtre enfant
