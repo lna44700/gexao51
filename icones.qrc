@@ -10,5 +10,6 @@
         <file>stop_all.ico</file>
         <file>icone_g_google.ico</file>
         <file>icone_g_key.ico</file>
+        <file>rec.ico</file>
     </qresource>
 </RCC>

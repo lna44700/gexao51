@@ -39,9 +39,6 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="1" rowspan="10" colspan="2">
-    <widget class="QTableView" name="tvValeurs"/>
-   </item>
    <item row="1" column="0">
     <widget class="QLCDNumber" name="lcdValeur">
      <property name="font">
@@ -95,15 +92,25 @@
    <item row="10" column="1">
     <widget class="QPushButton" name="btnLancer">
      <property name="text">
-      <string>Lancer</string>
+      <string/>
      </property>
     </widget>
    </item>
    <item row="10" column="2">
-    <widget class="QPushButton" name="btnStopper">
+    <widget class="QPushButton" name="btnEnregistrement">
      <property name="text">
-      <string>Stopper</string>
+      <string/>
      </property>
+    </widget>
+   </item>
+   <item row="0" column="1" rowspan="10" colspan="2">
+    <widget class="QTableWidget" name="tvValeurs">
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>37</number>
+     </attribute>
+     <attribute name="verticalHeaderMinimumSectionSize">
+      <number>25</number>
+     </attribute>
     </widget>
    </item>
   </layout>

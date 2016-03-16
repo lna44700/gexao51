@@ -32,18 +32,19 @@ F_Principale::F_Principale(QWidget *parent) :
 
     this->oMonArduino = new Arduino;
 
-    this->oMonArduino->Ouvrir();
-    sleep(1);
-/*
-    //Lecture du port pour lire le nom
-    this->oMonArduino->LirePort();
+    /*this->oMonArduino->Ouvrir();
+    sleep(1);*/
 
-    this->DonneesLues = oMonArduino->LireCapteur("A10");
+    //Lecture du port pour lire le nom
+
+
+    /*this->DonneesLues = oMonArduino->LireCapteur("A10");
     qDebug() << this->DonneesLues;*/
 
     //Ajout de la led de détection de l'Arduino - Vert si détection, rouge sinon
     if(this->oMonArduino->Ouvrir() == true)
     {
+        this->oMonArduino->LirePort();
         iconLbl->setPixmap(IconeVert);
         texteLbl->setText("Arduino détectée !");
         ui->statusBar->addWidget(iconLbl);
@@ -80,6 +81,7 @@ void F_Principale::displayAbout() //action qui affiche un message en pop-up
 void F_Principale::createChild() //action de création de la fenêtre enfant
 {
     F_Sonde *f_sonde = new F_Sonde(this->oMonArduino, static_cast<QWidget*>(ui->mdiArea)); // création d'une variable de type f_sonde
+    //connect(this,)
     f_sonde->setAttribute(Qt::WA_DeleteOnClose); //detruit le widget lors de la fermeture de l'évenement
     ui->mdiArea->addSubWindow(f_sonde); // ajoute la fenêtre enfant f_sonde à la fenêtre MDI
     f_sonde->show(); // affiche la fenêtre enfant
@@ -91,12 +93,17 @@ void F_Principale::displaySelection()//action d'affichage fenêtre de séléctio
     f_choix->show();
 }
 
+//Affiche la même heure et date partout sur la base de la première fenêtre
 void F_Principale::on_actionHeureDatePartout_triggered()
 {
-
+    /*ui->mdiArea->sub
+    foreach (F_Sonde *f_sonde, ui->mdiArea)
+    {
+        f_sonde->
+    }*/
 }
 
-//Fênetre d'ouverture des paramètres d'acquisition
+//Fenêtre d'ouverture des paramètres d'acquisition
 void F_Principale::on_actionOuvrir_triggered()
 {
     QString fichier = QFileDialog::getOpenFileName(this, "Ouvrir les paramètres d'acquisition", QString(), "Fichier de paramètre (*.ini)");

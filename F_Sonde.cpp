@@ -8,7 +8,8 @@
 #include <iostream>
 #include <unistd.h>
 #include <QPixmap>
-
+#include <QStandardItem>
+#include <QDebug>
 using namespace std;
 
 F_Sonde::F_Sonde(Arduino *oMonArduino, QWidget *parent) :
@@ -41,12 +42,24 @@ F_Sonde::F_Sonde(Arduino *oMonArduino, QWidget *parent) :
     ui->btnLancer->setIcon(QIcon(":/new/prefix1/start.ico"));
     ui->btnLancer->setIconSize(QSize(30,30));
     ui->btnLancer->setCheckable(true);
+    ui->btnLancer->setEnabled(false);
 
     //Met l'icone sur le bouton stopper
-    ui->btnStopper->setText("");
-    ui->btnStopper->setIcon(QIcon(":/new/prefix1/stop.ico"));
-    ui->btnStopper->setIconSize(QSize(30,30));
-    ui->btnStopper->setCheckable(true);
+    ui->btnEnregistrement->setText("");
+    ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/rec.ico"));
+    ui->btnEnregistrement->setIconSize(QSize(30,30));
+    ui->btnEnregistrement->setCheckable(true);
+
+
+    ui->tvValeurs->setRowCount(5);
+    ui->tvValeurs->setColumnCount(1);
+    ui->tvValeurs->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tvValeurs->setColumnWidth(0,215);
+    ui->tvValeurs->setHorizontalHeaderLabels(QStringList()<<"Valeur");
+    ui->tvValeurs->verticalHeader()->setFixedWidth(30);
+    //ui->tvValeurs->verticalHeader()->setStr
+    //m_TableHeader<<"#"<<"Name"<<"Text";
+    //ui->tvValeurs->setHorizontalHeaderLabels(m_TableHeader);
 
 
 }
@@ -56,7 +69,7 @@ F_Sonde::~F_Sonde()
     delete ui;
 }
 
-void F_Sonde::on_btnModeAcquisition_clicked()
+void F_Sonde::on_btnModeAcquisition_clicked()//Action lors du clique sur le bouton de mode d'acquisition
 {
     if (ui->btnModeAcquisition->text() == "Automatique")//Si le texte du bouton est 'Automatique'
     {
@@ -69,6 +82,7 @@ void F_Sonde::on_btnModeAcquisition_clicked()
         ui->tlDateHeure->hide();
         ui->deDateAcquisition->hide();
         ui->tiHeureAcquisition->hide();
+        ui->btnLancer->setEnabled(true);
 
     }
     else if (ui->btnModeAcquisition->text() == "Manuel")//Si le texte du bouton est 'Manuel'
@@ -82,6 +96,7 @@ void F_Sonde::on_btnModeAcquisition_clicked()
         ui->tlDateHeure->show();
         ui->deDateAcquisition->show();
         ui->tiHeureAcquisition->show();
+        ui->btnLancer->setEnabled(false);
     }
 }
 
@@ -112,18 +127,42 @@ void F_Sonde::on_btnModeAcquisition_clicked()
 }*/
 //------------------------------------------------------------------------
 
-void F_Sonde::on_btnLancer_clicked()
+void F_Sonde::on_btnLancer_clicked()//Action lorsque le bouton Lancer est appuyé
 {
-    /*int test(0);
+    static bool bEtatLancer(true);
+
+    //Change l'icone Lancer du touton par l'icone Stop
+    if (bEtatLancer == true)
+    {
+        //Met l'icone sur le bouton stopper
+        ui->btnLancer->setText("");
+        ui->btnLancer->setIcon(QIcon(":/new/prefix1/stop.ico"));
+        ui->btnLancer->setIconSize(QSize(30,30));
+        ui->btnLancer->setCheckable(true);
+        bEtatLancer = false;
+    }
+    else if (bEtatLancer == false)
+    {
+        //Met l'icone sur le bouton lancer
+        ui->btnLancer->setText("");
+        ui->btnLancer->setIcon(QIcon(":/new/prefix1/start.ico"));
+        ui->btnLancer->setIconSize(QSize(30,30));
+        ui->btnLancer->setCheckable(true);
+        bEtatLancer = true;
+    }
+
+
+    int test(0);
     int i(0);
 
-    while(i < 5)
+    /*while(i < 5)
     {
         test = this->oArduino->LireCapteur("A10");
+        qDebug()<<test;
         ui->lcdValeur->display(test);
-        i++;
-    }
-    if (ui->cbModeVisualisation->isChecked() == false)
+        /*i++;
+    }*/
+    /*if (ui->cbModeVisualisation->isChecked() == false)
     {
         ofstream file ("Test.csv", ios::out);
         file << test << ";" << test << "\n" << endl;
@@ -132,7 +171,27 @@ void F_Sonde::on_btnLancer_clicked()
 
 }
 
-void F_Sonde::on_btnStopper_clicked(bool checked)
+void F_Sonde::on_btnEnregistrement_clicked(bool checked)//Action lorsque le bouton Stopper est appuyé
 {
+    static bool bEtatRecup(true);
 
+    //Change l'icone du bouton Record par l'icone Stop
+    if (bEtatRecup == true)
+    {
+        //Met l'icone sur le bouton stopper
+        ui->btnEnregistrement->setText("");
+        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/stop.ico"));
+        ui->btnEnregistrement->setIconSize(QSize(30,30));
+        ui->btnEnregistrement->setCheckable(true);
+        bEtatRecup = false;
+    }
+    else if (bEtatRecup == false)
+    {
+        //Met l'icone sur le bouton lancer
+        ui->btnEnregistrement->setText("");
+        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/rec.ico"));
+        ui->btnEnregistrement->setIconSize(QSize(30,30));
+        ui->btnEnregistrement->setCheckable(true);
+        bEtatRecup = true;
+    }
 }

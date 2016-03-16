@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "Arduino.h"
+#include <QStandardItem>
 
 namespace Ui {
 class F_Sonde;
@@ -23,11 +24,12 @@ private slots:
 
     void on_btnLancer_clicked();
 
-    void on_btnStopper_clicked(bool checked);
+    void on_btnEnregistrement_clicked(bool checked);
 
 private:
     Ui::F_Sonde *ui;
     Arduino *oArduino;
+    QStandardItemModel *model = new QStandardItemModel;
 
 };
 
