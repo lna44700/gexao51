@@ -1,7 +1,6 @@
 #include "F_Principale.h"
 #include "ui_F_Principale.h"
 #include <F_Sonde.h>
-#include "EnfantSonde.h"
 #include "F_ChoisirSonde.h"
 #include <QtGui>
 #include <QMdiArea>
@@ -21,14 +20,14 @@ F_Principale::F_Principale(QWidget *parent) :
     ui->setupUi(this);
 
     //Ajout de l'icone de l'application
-    QIcon icon(":/new/prefix1/icone_g_key.ico");
+    QIcon icon(":/new/prefix1/icones/icone_g_key.ico");
     QWidget::setWindowIcon(icon);
 
     //Définition des icones et texte pour la détection de l'Arduino
     QLabel *iconLbl = new QLabel;
     QLabel *texteLbl = new QLabel;
-    QPixmap IconeVert(":/new/prefix1/led_verte_red.ico");
-    QPixmap IconeRouge(":/new/prefix1/led_rouge_red.ico");
+    QPixmap IconeVert(":/new/prefix1/icones/led_verte_red.ico");
+    QPixmap IconeRouge(":/new/prefix1/icones/led_rouge_red.ico");
 
     this->oMonArduino = new Arduino;
 
@@ -44,6 +43,7 @@ F_Principale::F_Principale(QWidget *parent) :
     //Ajout de la led de détection de l'Arduino - Vert si détection, rouge sinon
     if(this->oMonArduino->Ouvrir() == true)
     {
+        sleep(1);
         this->oMonArduino->LirePort();
         iconLbl->setPixmap(IconeVert);
         texteLbl->setText("Arduino détectée !");

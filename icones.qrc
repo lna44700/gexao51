@@ -1,15 +1,15 @@
 <RCC>
     <qresource prefix="/new/prefix1">
-        <file>clock.ico</file>
-        <file>date_clock.ico</file>
-        <file>led_rouge_red.ico</file>
-        <file>led_verte_red.ico</file>
-        <file>start.ico</file>
-        <file>start_all.ico</file>
-        <file>stop.ico</file>
-        <file>stop_all.ico</file>
-        <file>icone_g_google.ico</file>
-        <file>icone_g_key.ico</file>
-        <file>rec.ico</file>
+        <file>icones/clock.ico</file>
+        <file>icones/date_clock.ico</file>
+        <file>icones/icone_g_google.ico</file>
+        <file>icones/icone_g_key.ico</file>
+        <file>icones/led_rouge_red.ico</file>
+        <file>icones/led_verte_red.ico</file>
+        <file>icones/rec.ico</file>
+        <file>icones/start.ico</file>
+        <file>icones/start_all.ico</file>
+        <file>icones/stop.ico</file>
+        <file>icones/stop_all.ico</file>
     </qresource>
 </RCC>

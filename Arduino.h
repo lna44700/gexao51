@@ -1,6 +1,7 @@
 #ifndef ARDUINO_H
 #define ARDUINO_H
 #include "qextserialport.h"
+#include <QSemaphore>
 
 class Arduino
 {
@@ -13,12 +14,13 @@ public:
     void EcrirePort(QString Commande);
     QByteArray LirePort();
     int LireCapteur(QString Commande);
+    QSemaphore * Semaphore;
 
 private:
     QextSerialPort * Port;
-    QString NomPort;
     QByteArray Buffer;
-    QByteArray RetourLecturePort;
+    QString NomPort;
+
 };
 
 #endif // ARDUINO_H

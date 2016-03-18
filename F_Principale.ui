@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>753</width>
-    <height>464</height>
+    <width>880</width>
+    <height>520</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>753</width>
+     <width>880</width>
      <height>21</height>
     </rect>
    </property>
@@ -149,7 +149,7 @@
   <action name="actionLancerTous">
    <property name="icon">
     <iconset resource="icones.qrc">
-     <normaloff>:/new/prefix1/start_all.ico</normaloff>:/new/prefix1/start_all.ico</iconset>
+     <normaloff>:/new/prefix1/icones/start_all.ico</normaloff>:/new/prefix1/icones/start_all.ico</iconset>
    </property>
    <property name="text">
     <string>Lancer toutes les sondes</string>
@@ -161,7 +161,7 @@
   <action name="actionStopperTous">
    <property name="icon">
     <iconset resource="icones.qrc">
-     <normaloff>:/new/prefix1/stop_all.ico</normaloff>:/new/prefix1/stop_all.ico</iconset>
+     <normaloff>:/new/prefix1/icones/stop_all.ico</normaloff>:/new/prefix1/icones/stop_all.ico</iconset>
    </property>
    <property name="text">
     <string>Stopper l'acquisition de toutes les sondes</string>
@@ -170,7 +170,7 @@
   <action name="actionHeureDatePartout">
    <property name="icon">
     <iconset resource="icones.qrc">
-     <normaloff>:/new/prefix1/date_clock.ico</normaloff>:/new/prefix1/date_clock.ico</iconset>
+     <normaloff>:/new/prefix1/icones/date_clock.ico</normaloff>:/new/prefix1/icones/date_clock.ico</iconset>
    </property>
    <property name="text">
     <string>Appliquer la même heure et date sur toutes les sondes</string>

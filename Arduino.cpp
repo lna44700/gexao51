@@ -3,18 +3,21 @@
 #include "qextserialenumerator.h"
 #include <QDebug>
 #include <QString>
+#include <unistd.h>
 
 Arduino::Arduino():
-    Port(NULL),
-    Buffer("")
-{
+    Semaphore()
 
+{
+    this->Semaphore = new QSemaphore (1);
 }
 
 Arduino::~Arduino()
 {
-    this->Port=NULL;
-    this->Buffer="";
+    this->Port = NULL;
+    this->Semaphore = NULL;
+    this->Buffer = "";
+    this->NomPort = "";
 }
 
 bool Arduino::Ouvrir()
@@ -24,7 +27,7 @@ bool Arduino::Ouvrir()
     bool bRetour (false);
 
     //Création de la variable qui permet de tester si un arduino a été détecté
-    bool ArduinoPresent(false);
+    bool ArduinoPresent (false);
 
     //L'objet mentionnant les infos des ports série
     QextSerialEnumerator enumerateur;
@@ -33,7 +36,7 @@ bool Arduino::Ouvrir()
     QList<QextPortInfo> Ports = enumerateur.getPorts();
 
     //On parcours la totalité des ports séries détectés
-    for(int i=0; i < Ports.length(); i++)
+    for(int i = 0; i < Ports.length(); i++)
         {
             if(Ports[i].vendorID == 0x2341)    //Si un port avec un VID de 0x2341 l'Arduino est détecté
             {
@@ -45,12 +48,12 @@ bool Arduino::Ouvrir()
                 this->Port = new QextSerialPort();
 
                 //Quelques règlages pour que tout marche bien
-                this->Port->setPortName(this->NomPort);
-                this->Port->setBaudRate(BAUD9600);              //On règle la vitesse utilisée
-                this->Port->setParity(PAR_NONE);                //On règle la parité
-                this->Port->setStopBits(STOP_1);                //On règle le nombre de bits de stop
-                this->Port->setDataBits(DATA_8);                //On règle le nombre de bits de données
-                this->Port->setFlowControl(FLOW_OFF);           //Pas de contrôle de flux
+                this->Port->setPortName    (this->NomPort);
+                this->Port->setBaudRate    (BAUD9600);           //On règle la vitesse utilisée
+                this->Port->setParity      (PAR_NONE);           //On règle la parité
+                this->Port->setStopBits    (STOP_1);             //On règle le nombre de bits de stop
+                this->Port->setDataBits    (DATA_8);             //On règle le nombre de bits de données
+                this->Port->setFlowControl (FLOW_OFF);           //Pas de contrôle de flux
 
                 //On ouvre la connexion avec l'arduino
                 Port->open(QextSerialPort::ReadWrite);
@@ -79,7 +82,7 @@ bool Arduino::Ouvrir()
 
 bool Arduino::Fermer()
 {
-    bool bRetour(false);
+    bool bRetour (false);
 
     //On ferme la connexion avec l'arduino
     this->Port->close();
@@ -100,10 +103,12 @@ bool Arduino::Fermer()
 
 void Arduino::EcrirePort(QString Commande)
 {
+    //Si le port série est ouvert
     if(this->Port->isOpen() == true)
     {
-        this->Port->write(Commande.toStdString().c_str());
+        this->Port->write(Commande.toStdString().c_str()); //On écrit sur le port la commande reçue en paramètre
     }
+    //Sinon un message d'erreur est envoyé en sortie de compilation
     else
     {
         qDebug() << "L'écriture sur le port série à échouée";
@@ -112,83 +117,99 @@ void Arduino::EcrirePort(QString Commande)
 
 QByteArray Arduino::LirePort()
 {
+    //Si le port série est ouvert
     if(this->Port->isOpen() == true)
     {
-        this->Buffer+=Port->readAll();
+        while(this->Buffer.right(1) != "\n" )
+        {
+        this->Buffer += this->Port->readAll(); //On remplie le Buffer
+        }
     }
+    //Sinon un message d'erreur est envoyé en sortie de compilation
     else
     {
         qDebug() << "La lecture sur le port série à échouée";
     }
+    qDebug() << Buffer;
 
     return this->Buffer;
 }
 
 int Arduino::LireCapteur(QString Commande)
 {
-    while(Buffer.isEmpty()!=true)
-    {
-        Buffer.clear();
-    }
+
+    //Acquisition du sémaphore
+    Semaphore->acquire(1);
+
+    QByteArray RetourLecturePort("");
+    QString DonneesLues("");
     int Retour(0);
 
-    QString DonneesLues("");
-
-    //Récupération des premiers caractères de la commande afin de définir quelle type d'entrée est à lire
-    QString TypeEntree("");
-    TypeEntree = Commande;
-    TypeEntree.resize(1);
-
-
-
-
-
+    //On efface entièrement le Buffer pour une nouvelle lecture
+    while(this->Buffer.isEmpty() != true)
+    {
+        this->Buffer.clear();
+    }
 
     //Type d'entrée Jack ou I2C
     this->EcrirePort(Commande);
 
-    while(this->LirePort().right(1)!="\n")
+    //Lecture du port jusqu'à la fin de la ligne
+    while(this->LirePort().right(2) != "\r\n" )
     {
-        this->RetourLecturePort = this->LirePort();
+        RetourLecturePort = this->LirePort(); //On récupère le Buffer de la fonction LirePort()
     }
 
+    DonneesLues += RetourLecturePort;     //On copie le Buffer dans un QString
 
+    qDebug() << DonneesLues;
 
+    DonneesLues = DonneesLues.remove(0,6);      //On supprime les 6 premiers caractères (VALUE=)
+    DonneesLues.resize(DonneesLues.size()-2);   //On supprime les deux derniers caractères (\r\n)
 
-
-    DonneesLues += RetourLecturePort;
-    DonneesLues = DonneesLues.remove(0,6);
-    DonneesLues.resize(DonneesLues.size()-2);
-
+    //Si l'entrée est de type jack, on renvoie la valeur maintenant
+    //La valeur de retour est un entier
     Retour = DonneesLues.toInt(0,10);
 
-    //Type d'entrée I2C seulement
-    if(TypeEntree == "i")
+    //Si l'entrée est de type I2C (si la commande commence par 'i'), la donnée à interpréter est sur deux octets,
+    //il faut donc calculer la valeur décimale en fonction du poids fort et du poids faible
+    if(Commande[0] == 'i')
     {
-        QString CopieDonneesLues("");
-        int PoidsFort(0);
-        int PoidsFaible(0);
+        QString CopieDonneesLues  ("");
+        unsigned char PoidsFort   (0);
+        unsigned char PoidsFaible (0);
 
+        //On copie la variable DonneesLues
         CopieDonneesLues = DonneesLues;
+
+        //On redimentionne la variable pour vérifier si elle commence par le caractère '-',
+        //afin de savoir si une sonde à été détectée ou non
         DonneesLues.resize(1);
 
+        //Retourne la valeur -1 si aucun capteur n'est détecté sur le BUS I2C à l'adresse passée en paramètre
         if(DonneesLues == "-")
         {
             Retour = (-1);
         }
         else
         {
-            PoidsFaible = DonneesLues.toInt(0,10);
+            //Si le caractère n'est pas '-', alors il s'agit de l'octet de poids fort, qu'on met dans une variable
+            PoidsFort = DonneesLues.toInt(0,10);
 
+            //On utilise la variable de copie pour récupérer l'octet de poids faible
+            //On supprime les deux premiers caractères (le caractère correspondant au poids fort et la virgule)
             CopieDonneesLues = CopieDonneesLues.remove(0,2);
-            PoidsFort = CopieDonneesLues.toInt(0,10);
 
-            Retour = ((PoidsFaible*256)+PoidsFort);
+            //On met le poids faible dans une variable
+            PoidsFaible = CopieDonneesLues.toInt(0,10);
+
+            //On renvoie la valeur décimale
+            Retour = ((PoidsFort*256)+PoidsFaible);
         }
-
     }
-    qDebug() << Retour;
 
+    //On libère le sémaphore
+    Semaphore->release(1);
 
     return Retour;
 }

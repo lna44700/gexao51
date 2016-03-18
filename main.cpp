@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     F_Principale w;
-    w.showMaximized();
+    w.show/*Maximized*/();
 
     return a.exec();
 }

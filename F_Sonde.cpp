@@ -10,6 +10,9 @@
 #include <QPixmap>
 #include <QStandardItem>
 #include <QDebug>
+#include <QMessageBox>
+
+
 using namespace std;
 
 F_Sonde::F_Sonde(Arduino *oMonArduino, QWidget *parent) :
@@ -39,29 +42,24 @@ F_Sonde::F_Sonde(Arduino *oMonArduino, QWidget *parent) :
 
     //Met l'icone sur le bouton lancer
     ui->btnLancer->setText("");
-    ui->btnLancer->setIcon(QIcon(":/new/prefix1/start.ico"));
+    ui->btnLancer->setIcon(QIcon(":/new/prefix1/icones/start.ico"));
     ui->btnLancer->setIconSize(QSize(30,30));
     ui->btnLancer->setCheckable(true);
     ui->btnLancer->setEnabled(false);
 
     //Met l'icone sur le bouton stopper
     ui->btnEnregistrement->setText("");
-    ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/rec.ico"));
+    ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/icones/rec.ico"));
     ui->btnEnregistrement->setIconSize(QSize(30,30));
     ui->btnEnregistrement->setCheckable(true);
 
 
-    ui->tvValeurs->setRowCount(5);
+    //Gere le tableau (nombre de colonnes, taille, intitulé)
     ui->tvValeurs->setColumnCount(1);
     ui->tvValeurs->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tvValeurs->setColumnWidth(0,215);
     ui->tvValeurs->setHorizontalHeaderLabels(QStringList()<<"Valeur");
     ui->tvValeurs->verticalHeader()->setFixedWidth(30);
-    //ui->tvValeurs->verticalHeader()->setStr
-    //m_TableHeader<<"#"<<"Name"<<"Text";
-    //ui->tvValeurs->setHorizontalHeaderLabels(m_TableHeader);
-
-
 }
 
 F_Sonde::~F_Sonde()
@@ -100,35 +98,10 @@ void F_Sonde::on_btnModeAcquisition_clicked()//Action lors du clique sur le bout
     }
 }
 
-//-------------------A ENLEVER PLUS TARD-------------------
-/*void F_Sonde::on_cbModeVisualisation_toggled(bool checked)
-{
-    if (checked == true)//Si mode visualisation coché, on désactive les différents objets graphiques
-    { 
-        ui->tvValeurs->setEnabled(false);
-        ui->leTpsAcquisition->setEnabled(false);
-        ui->spIntervalle->setEnabled(false);
-        ui->deDateAcquisition->setEnabled(false);
-        ui->tiHeureAcquisition->setEnabled(false);
-        ui->btnLancer->setEnabled(false);
-        ui->btnStopper->setEnabled(false);
-    }
-    else if (checked == false)//Si mode visualisation décoché, on les réactives
-    {
-        ui->tvValeurs->setEnabled(true);
-        ui->leTpsAcquisition->setEnabled(true);
-        ui->spIntervalle->setEnabled(true);
-        ui->deDateAcquisition->setEnabled(true);
-        ui->tiHeureAcquisition->setEnabled(true);
-        ui->btnLancer->setEnabled(true);
-        ui->btnStopper->setEnabled(true);
-
-    }
-}*/
-//------------------------------------------------------------------------
-
 void F_Sonde::on_btnLancer_clicked()//Action lorsque le bouton Lancer est appuyé
 {
+
+    //**************************ICONE******************************
     static bool bEtatLancer(true);
 
     //Change l'icone Lancer du touton par l'icone Stop
@@ -136,7 +109,7 @@ void F_Sonde::on_btnLancer_clicked()//Action lorsque le bouton Lancer est appuy�
     {
         //Met l'icone sur le bouton stopper
         ui->btnLancer->setText("");
-        ui->btnLancer->setIcon(QIcon(":/new/prefix1/stop.ico"));
+        ui->btnLancer->setIcon(QIcon(":/new/prefix1/icones/stop.ico"));
         ui->btnLancer->setIconSize(QSize(30,30));
         ui->btnLancer->setCheckable(true);
         bEtatLancer = false;
@@ -145,34 +118,64 @@ void F_Sonde::on_btnLancer_clicked()//Action lorsque le bouton Lancer est appuy�
     {
         //Met l'icone sur le bouton lancer
         ui->btnLancer->setText("");
-        ui->btnLancer->setIcon(QIcon(":/new/prefix1/start.ico"));
+        ui->btnLancer->setIcon(QIcon(":/new/prefix1/icones/start.ico"));
         ui->btnLancer->setIconSize(QSize(30,30));
         ui->btnLancer->setCheckable(true);
         bEtatLancer = true;
     }
+    //******************************************************
 
+    //++++++++++++++++++++VERIFICATION+++++++++++++++++++
 
-    int test(0);
-    int i(0);
-
-    /*while(i < 5)
+    //Verifie si une valeur a été rentrée dans les champs
+    if (ui->spIntervalle->value() == NULL || ui->leTpsAcquisition == NULL)
     {
-        test = this->oArduino->LireCapteur("A10");
-        qDebug()<<test;
-        ui->lcdValeur->display(test);
-        /*i++;
-    }*/
-    /*if (ui->cbModeVisualisation->isChecked() == false)
+        //Remet en place l'icone sur le bouton lancer
+        ui->btnLancer->setText("");
+        ui->btnLancer->setIcon(QIcon(":/new/prefix1/icones/start.ico"));
+        ui->btnLancer->setIconSize(QSize(30,30));
+        ui->btnLancer->setCheckable(true);
+        bEtatLancer = true;
+
+        //Affiche un message d'erreur
+        QMessageBox::about(this, tr("Erreur"),
+        tr("Vous avez oublié de rentrer un temps et/ou un intervalle d'acquisition !"));
+        return;//Quitter la fonction
+    }
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+    //---------------------AFFICHAGE-------------------
+
+    //Declaration des variables pour tableau
+    int Affichage(0);
+    int nIntervalle(0);
+    int nDureeMesure(0);
+    int nDureeTotale(0);
+
+    //Calcul des temps d'acquisition et nombre de mesures
+    nIntervalle = ui->spIntervalle->value();
+    nDureeMesure = ui->leTpsAcquisition->text().toInt();
+    nDureeMesure = nDureeMesure*60;
+    nDureeTotale = nDureeMesure/nIntervalle;
+    /*qDebug()<<nIntervalle;
+    qDebug()<<nDureeMesure;
+    qDebug()<<nDureeTotale;*/
+
+    for(unsigned int i=nDureeTotale;i<0;i--)
     {
-        ofstream file ("Test.csv", ios::out);
-        file << test << ";" << test << "\n" << endl;
-
-    }*/
-
+        //Récupération de la données et affichage sur lecteur LCD
+        Affichage = this->oArduino->LireCapteur("A10");
+        qDebug()<<Affichage;
+        ui->lcdValeur->display(Affichage);
+        sleep(nIntervalle);
+     }
+    //----------------------------------------------------
 }
 
 void F_Sonde::on_btnEnregistrement_clicked(bool checked)//Action lorsque le bouton Stopper est appuyé
 {
+    //************************ICONE*************************
     static bool bEtatRecup(true);
 
     //Change l'icone du bouton Record par l'icone Stop
@@ -180,7 +183,7 @@ void F_Sonde::on_btnEnregistrement_clicked(bool checked)//Action lorsque le bout
     {
         //Met l'icone sur le bouton stopper
         ui->btnEnregistrement->setText("");
-        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/stop.ico"));
+        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/icones/stop.ico"));
         ui->btnEnregistrement->setIconSize(QSize(30,30));
         ui->btnEnregistrement->setCheckable(true);
         bEtatRecup = false;
@@ -189,9 +192,85 @@ void F_Sonde::on_btnEnregistrement_clicked(bool checked)//Action lorsque le bout
     {
         //Met l'icone sur le bouton lancer
         ui->btnEnregistrement->setText("");
-        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/rec.ico"));
+        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/icones/rec.ico"));
         ui->btnEnregistrement->setIconSize(QSize(30,30));
         ui->btnEnregistrement->setCheckable(true);
         bEtatRecup = true;
     }
+    //*****************************************************
+
+    //++++++++++++++++++++++++++++VERIFICATION++++++++++++++++++++++++++++++++
+
+    if (ui->spIntervalle->value() == NULL || ui->leTpsAcquisition == NULL)
+    {
+        //Met l'icone sur le bouton lancer
+        ui->btnEnregistrement->setText("");
+        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/icones/rec.ico"));
+        ui->btnEnregistrement->setIconSize(QSize(30,30));
+        ui->btnEnregistrement->setCheckable(true);
+        bEtatRecup = true;
+
+        QMessageBox::about(this, tr("Erreur"),
+        tr("Vous avez oublié de rentrer un temps et/ou un intervalle d'acquisition !"));
+        return;
+    }
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    //---------------------TABLEAU------------------------
+
+    //Declaration des variables pour tableau
+    int Affichage(0);
+    int nIntervalle(0);
+    int nDureeMesure(0);
+    int nDureeTotale(0);
+
+    //Calcul des temps d'acquisition et nombre de mesures
+    nIntervalle = ui->spIntervalle->value();
+    nDureeMesure = ui->leTpsAcquisition->text().toInt();
+    nDureeMesure = nDureeMesure*60;
+    nDureeTotale = nDureeMesure/nIntervalle;
+    /*qDebug()<<nIntervalle;
+    qDebug()<<nDureeMesure;
+    qDebug()<<nDureeTotale;*/
+
+    /*for(unsigned int i=nDureeTotale;i<0;i--)
+    {*/
+
+        //Récupération de la données et affichage sur lecteur LCD
+        Affichage = 25; //this->oArduino->LireCapteur("A10");
+        qDebug()<<Affichage;
+        ui->lcdValeur->display(Affichage);
+        ui->tvValeurs->setRowCount(nDureeTotale);
+
+        //Affichage de la valeur dans le tableau
+        QString Var;
+        QTableWidgetItem *item = new QTableWidgetItem(Var.setNum(Affichage));
+        ui->tvValeurs->setItem(0,0,item);
+        //sleep(2);
+
+    //}
+
+    //Nom du fichier à partir de la date et l'heure
+    QTime heure = QTime::currentTime();
+    QDate date = QDate::currentDate();
+    QString FormatDate = "dd-MM-yyyy";
+    QString FormatHeure = "HH-mm";
+    QString Heure;
+    QString Date;
+    Heure = heure.toString(FormatHeure);
+    Date = date.toString(FormatDate);
+    QString NomTempo;
+    NomTempo = Date + "_" + Heure + ".csv";
+    const char* NomFichier = NomTempo.toStdString().c_str();
+
+    //Création et remplissage du fichier
+    ofstream file (NomFichier, ios::out);
+    file << "#" << ";" << "Valeur" << endl;
+
+    /*for(i=0;i<nDureeTotale;i++)
+    {*/
+        file << "1" << ";" << Affichage << endl;
+    //}
+
+     //----------------------------------------------
 }
