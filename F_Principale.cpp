@@ -20,14 +20,14 @@ F_Principale::F_Principale(QWidget *parent) :
     ui->setupUi(this);
 
     //Ajout de l'icone de l'application
-    QIcon icon(":/new/prefix1/icones/icone_g_key.ico");
+    QIcon icon(":/new/prefix1/images/icones/icone_g_key.ico");
     QWidget::setWindowIcon(icon);
 
     //Définition des icones et texte pour la détection de l'Arduino
     QLabel *iconLbl = new QLabel;
     QLabel *texteLbl = new QLabel;
-    QPixmap IconeVert(":/new/prefix1/icones/led_verte_red.ico");
-    QPixmap IconeRouge(":/new/prefix1/icones/led_rouge_red.ico");
+    QPixmap IconeVert(":/new/prefix1/images/icones/led_verte_red.ico");
+    QPixmap IconeRouge(":/new/prefix1/images/icones/led_rouge_red.ico");
 
     this->oMonArduino = new Arduino;
 

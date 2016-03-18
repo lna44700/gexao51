@@ -42,14 +42,14 @@ F_Sonde::F_Sonde(Arduino *oMonArduino, QWidget *parent) :
 
     //Met l'icone sur le bouton lancer
     ui->btnLancer->setText("");
-    ui->btnLancer->setIcon(QIcon(":/new/prefix1/icones/start.ico"));
+    ui->btnLancer->setIcon(QIcon(":/new/prefix1/images/icones/start.ico"));
     ui->btnLancer->setIconSize(QSize(30,30));
     ui->btnLancer->setCheckable(true);
     ui->btnLancer->setEnabled(false);
 
     //Met l'icone sur le bouton stopper
     ui->btnEnregistrement->setText("");
-    ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/icones/rec.ico"));
+    ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/images/icones/rec.ico"));
     ui->btnEnregistrement->setIconSize(QSize(30,30));
     ui->btnEnregistrement->setCheckable(true);
 
@@ -109,7 +109,7 @@ void F_Sonde::on_btnLancer_clicked()//Action lorsque le bouton Lancer est appuyÃ
     {
         //Met l'icone sur le bouton stopper
         ui->btnLancer->setText("");
-        ui->btnLancer->setIcon(QIcon(":/new/prefix1/icones/stop.ico"));
+        ui->btnLancer->setIcon(QIcon(":/new/prefix1/images/icones/stop.ico"));
         ui->btnLancer->setIconSize(QSize(30,30));
         ui->btnLancer->setCheckable(true);
         bEtatLancer = false;
@@ -118,7 +118,7 @@ void F_Sonde::on_btnLancer_clicked()//Action lorsque le bouton Lancer est appuyÃ
     {
         //Met l'icone sur le bouton lancer
         ui->btnLancer->setText("");
-        ui->btnLancer->setIcon(QIcon(":/new/prefix1/icones/start.ico"));
+        ui->btnLancer->setIcon(QIcon(":/new/prefix1/images/icones/start.ico"));
         ui->btnLancer->setIconSize(QSize(30,30));
         ui->btnLancer->setCheckable(true);
         bEtatLancer = true;
@@ -132,7 +132,7 @@ void F_Sonde::on_btnLancer_clicked()//Action lorsque le bouton Lancer est appuyÃ
     {
         //Remet en place l'icone sur le bouton lancer
         ui->btnLancer->setText("");
-        ui->btnLancer->setIcon(QIcon(":/new/prefix1/icones/start.ico"));
+        ui->btnLancer->setIcon(QIcon(":/new/prefix1/images/icones/start.ico"));
         ui->btnLancer->setIconSize(QSize(30,30));
         ui->btnLancer->setCheckable(true);
         bEtatLancer = true;
@@ -183,7 +183,7 @@ void F_Sonde::on_btnEnregistrement_clicked(bool checked)//Action lorsque le bout
     {
         //Met l'icone sur le bouton stopper
         ui->btnEnregistrement->setText("");
-        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/icones/stop.ico"));
+        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/images/icones/stop.ico"));
         ui->btnEnregistrement->setIconSize(QSize(30,30));
         ui->btnEnregistrement->setCheckable(true);
         bEtatRecup = false;
@@ -192,7 +192,7 @@ void F_Sonde::on_btnEnregistrement_clicked(bool checked)//Action lorsque le bout
     {
         //Met l'icone sur le bouton lancer
         ui->btnEnregistrement->setText("");
-        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/icones/rec.ico"));
+        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/images/icones/rec.ico"));
         ui->btnEnregistrement->setIconSize(QSize(30,30));
         ui->btnEnregistrement->setCheckable(true);
         bEtatRecup = true;
@@ -205,7 +205,7 @@ void F_Sonde::on_btnEnregistrement_clicked(bool checked)//Action lorsque le bout
     {
         //Met l'icone sur le bouton lancer
         ui->btnEnregistrement->setText("");
-        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/icones/rec.ico"));
+        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/images/icones/rec.ico"));
         ui->btnEnregistrement->setIconSize(QSize(30,30));
         ui->btnEnregistrement->setCheckable(true);
         bEtatRecup = true;
