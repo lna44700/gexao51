@@ -120,17 +120,13 @@ QByteArray Arduino::LirePort()
     //Si le port série est ouvert
     if(this->Port->isOpen() == true)
     {
-        while(this->Buffer.right(1) != "\n" )
-        {
         this->Buffer += this->Port->readAll(); //On remplie le Buffer
-        }
     }
     //Sinon un message d'erreur est envoyé en sortie de compilation
     else
     {
         qDebug() << "La lecture sur le port série à échouée";
     }
-    qDebug() << Buffer;
 
     return this->Buffer;
 }
@@ -155,14 +151,14 @@ int Arduino::LireCapteur(QString Commande)
     this->EcrirePort(Commande);
 
     //Lecture du port jusqu'à la fin de la ligne
-    while(this->LirePort().right(2) != "\r\n" )
+    while(RetourLecturePort.right(1) != "\n" )
     {
         RetourLecturePort = this->LirePort(); //On récupère le Buffer de la fonction LirePort()
     }
 
     DonneesLues += RetourLecturePort;     //On copie le Buffer dans un QString
 
-    qDebug() << DonneesLues;
+    //qDebug() << DonneesLues;
 
     DonneesLues = DonneesLues.remove(0,6);      //On supprime les 6 premiers caractères (VALUE=)
     DonneesLues.resize(DonneesLues.size()-2);   //On supprime les deux derniers caractères (\r\n)

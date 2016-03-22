@@ -11,5 +11,7 @@
         <file>images/icones/start_all.ico</file>
         <file>images/icones/stop.ico</file>
         <file>images/icones/stop_all.ico</file>
+        <file>images/icones/check.ico</file>
+        <file>images/icones/cross.ico</file>
     </qresource>
 </RCC>
