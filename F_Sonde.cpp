@@ -153,7 +153,7 @@ void F_Sonde::on_btnLancer_clicked()//Action lorsque le bouton Lancer est appuy�
     /*for(unsigned int i=nDureeTotale;i<0;i--)
     {*/
         //Récupération de la données et affichage sur lecteur LCD
-        Affichage = this->oArduino->LireCapteur("A10");
+        Affichage = 25;//this->oArduino->LireCapteur("A10");
         qDebug()<< "Valeur : " <<Affichage;
         ui->lcdValeur->display(Affichage);
         //sleep(nIntervalle);
