@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>F_Sonde</class>
+ <widget class="QWidget" name="F_Sonde">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>373</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>373</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>400</width>
+    <height>373</height>
+   </size>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>400</width>
+    <height>373</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Acquisition</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="tlValeur">
+     <property name="text">
+      <string>Valeur :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLCDNumber" name="lcdValeur">
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="btnModeAcquisition">
+     <property name="text">
+      <string>Automatique</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="tlTpsAcquisition">
+     <property name="text">
+      <string>Temps d'acquisition :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLineEdit" name="leTpsAcquisition"/>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="tlIntervalle">
+     <property name="text">
+      <string>Durée entre 2 mesures (s):</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QSpinBox" name="spIntervalle"/>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="tlDateHeure">
+     <property name="text">
+      <string>Date et heure du début :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QDateEdit" name="deDateAcquisition"/>
+   </item>
+   <item row="9" column="0">
+    <widget class="QTimeEdit" name="tiHeureAcquisition"/>
+   </item>
+   <item row="10" column="1">
+    <widget class="QPushButton" name="btnLancer">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="2">
+    <widget class="QPushButton" name="btnEnregistrement">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" rowspan="10" colspan="2">
+    <widget class="QTableWidget" name="tvValeurs">
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>37</number>
+     </attribute>
+     <attribute name="verticalHeaderMinimumSectionSize">
+      <number>25</number>
+     </attribute>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

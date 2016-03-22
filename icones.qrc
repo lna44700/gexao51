@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>images/icones/clock.ico</file>
+        <file>images/icones/date_clock.ico</file>
+        <file>images/icones/icone_g_google.ico</file>
+        <file>images/icones/icone_g_key.ico</file>
+        <file>images/icones/led_rouge_red.ico</file>
+        <file>images/icones/led_verte_red.ico</file>
+        <file>images/icones/rec.ico</file>
+        <file>images/icones/start.ico</file>
+        <file>images/icones/start_all.ico</file>
+        <file>images/icones/stop.ico</file>
+        <file>images/icones/stop_all.ico</file>
+        <file>images/icones/check.ico</file>
+        <file>images/icones/cross.ico</file>
+    </qresource>
+</RCC>
