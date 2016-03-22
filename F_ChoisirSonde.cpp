@@ -134,7 +134,7 @@ F_ChoisirSonde::F_ChoisirSonde(Arduino *oMonArduino, QSettings* Config, QStringL
         this->ui->GrpBx->layout()->addWidget(this->ListeCap);
 
 
-        this->ui->CB_Interface->addItems(ListeInterfaceInstall);
+        this->ui->CBx_Interface->addItems(ListeInterfaceInstall);
 
         for(register int i = 0; i < ListeInterfaceInstall.length(); i++)
         {
@@ -186,8 +186,8 @@ F_ChoisirSonde::F_ChoisirSonde(Arduino *oMonArduino, QSettings* Config, QStringL
             }
         }
 
-        this->ListeCap->setModel(this->Models.at(this->ui->CB_Interface->currentIndex()));
-        this->ui->Vue->setScene(this->Scenes.at(this->ui->CB_Interface->currentIndex()));
+        this->ListeCap->setModel(this->Models.at(this->ui->CBx_Interface->currentIndex()));
+        this->ui->Vue->setScene(this->Scenes.at(this->ui->CBx_Interface->currentIndex()));
 
 }
 
@@ -197,7 +197,7 @@ F_ChoisirSonde::~F_ChoisirSonde()
     delete ui;
 }
 
-void F_ChoisirSonde::on_CB_Interface_currentIndexChanged(int index)
+void F_ChoisirSonde::on_CBx_Interface_currentIndexChanged(int index)
 {
     if(index < this->Models.length())
     {
@@ -206,12 +206,12 @@ void F_ChoisirSonde::on_CB_Interface_currentIndexChanged(int index)
     }
 }
 
-void F_ChoisirSonde::on_Btn_Annuler_clicked()
+void F_ChoisirSonde::on_Bt_Annuler_clicked()
 {
     this->close();
 }
 
-void F_ChoisirSonde::on_Btn_Valider_clicked()
+void F_ChoisirSonde::on_Bt_Valider_clicked()
 {
     for(unsigned int i=0; i<this->Scenes.length(); i++)
     {
@@ -223,4 +223,3 @@ void F_ChoisirSonde::on_Btn_Valider_clicked()
 
     this->close();
 }
-

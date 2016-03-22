@@ -33,14 +33,14 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QLabel" name="tlValeur">
+    <widget class="QLabel" name="Lb_Valeur">
      <property name="text">
       <string>Valeur :</string>
      </property>
     </widget>
    </item>
    <item row="1" column="0">
-    <widget class="QLCDNumber" name="lcdValeur">
+    <widget class="QLCDNumber" name="Lcd_Valeur">
      <property name="font">
       <font>
        <weight>50</weight>
@@ -50,61 +50,61 @@
     </widget>
    </item>
    <item row="2" column="0">
-    <widget class="QPushButton" name="btnModeAcquisition">
+    <widget class="QPushButton" name="Bt_ModeAcquisition">
      <property name="text">
       <string>Automatique</string>
      </property>
     </widget>
    </item>
    <item row="3" column="0">
-    <widget class="QLabel" name="tlTpsAcquisition">
+    <widget class="QLabel" name="Lb_TpsAcquisition">
      <property name="text">
       <string>Temps d'acquisition :</string>
      </property>
     </widget>
    </item>
    <item row="4" column="0">
-    <widget class="QLineEdit" name="leTpsAcquisition"/>
+    <widget class="QLineEdit" name="LE_TpsAcquisition"/>
    </item>
    <item row="5" column="0">
-    <widget class="QLabel" name="tlIntervalle">
+    <widget class="QLabel" name="Lb_Intervalle">
      <property name="text">
       <string>Durée entre 2 mesures (s):</string>
      </property>
     </widget>
    </item>
    <item row="6" column="0">
-    <widget class="QSpinBox" name="spIntervalle"/>
+    <widget class="QSpinBox" name="SBx_Intervalle"/>
    </item>
    <item row="7" column="0">
-    <widget class="QLabel" name="tlDateHeure">
+    <widget class="QLabel" name="Lb_DateHeure">
      <property name="text">
       <string>Date et heure du début :</string>
      </property>
     </widget>
    </item>
    <item row="8" column="0">
-    <widget class="QDateEdit" name="deDateAcquisition"/>
+    <widget class="QDateEdit" name="DtE_DateAcquisition"/>
    </item>
    <item row="9" column="0">
-    <widget class="QTimeEdit" name="tiHeureAcquisition"/>
+    <widget class="QTimeEdit" name="TiE_HeureAcquisition"/>
    </item>
    <item row="10" column="1">
-    <widget class="QPushButton" name="btnLancer">
+    <widget class="QPushButton" name="Bt_Lancer">
      <property name="text">
       <string/>
      </property>
     </widget>
    </item>
    <item row="10" column="2">
-    <widget class="QPushButton" name="btnEnregistrement">
+    <widget class="QPushButton" name="Bt_Enregistrement">
      <property name="text">
       <string/>
      </property>
     </widget>
    </item>
    <item row="0" column="1" rowspan="10" colspan="2">
-    <widget class="QTableWidget" name="tvValeurs">
+    <widget class="QTableWidget" name="TbW_Valeurs">
      <attribute name="horizontalHeaderMinimumSectionSize">
       <number>37</number>
      </attribute>

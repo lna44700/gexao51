@@ -18,13 +18,13 @@ public:
     ~F_Sonde();
 
 private slots:
-    void on_btnModeAcquisition_clicked();
+    void on_Bt_ModeAcquisition_clicked();
 
     //void on_cbModeVisualisation_toggled(bool checked);
 
-    void on_btnLancer_clicked();
+    void on_Bt_Lancer_clicked();
 
-    void on_btnEnregistrement_clicked(bool checked);
+    void on_Bt_Enregistrement_clicked();
 
 private:
     Ui::F_Sonde *ui;

@@ -24,38 +24,38 @@ F_Sonde::F_Sonde(Arduino *oMonArduino, QWidget *parent) :
 
     //Affiche la date actuelle par défaut
     QDate date = QDate::currentDate();
-    ui->deDateAcquisition->setDate(date);
+    ui->DtE_DateAcquisition->setDate(date);
 
     //Affiche l'heure actuelle par défaut
     QTime heure = QTime::currentTime();
-    ui->tiHeureAcquisition->setTime(heure);
+    ui->TiE_HeureAcquisition->setTime(heure);
 
     //Indications d'écriture dans les champs d'entrée
-    ui->leTpsAcquisition->setPlaceholderText("en minutes");
+    ui->LE_TpsAcquisition->setPlaceholderText("en minutes");
 
     QValidator *ValidatorTpsMesure = new QIntValidator(1, 9999, this);
-    ui->leTpsAcquisition->setValidator(ValidatorTpsMesure);
+    ui->LE_TpsAcquisition->setValidator(ValidatorTpsMesure);
 
     //Met l'icone sur le bouton lancer
-    ui->btnLancer->setText("");
-    ui->btnLancer->setIcon(QIcon(":/new/prefix1/images/icones/start.ico"));
-    ui->btnLancer->setIconSize(QSize(30,30));
-    ui->btnLancer->setCheckable(true);
-    ui->btnLancer->setEnabled(false);
+    ui->Bt_Lancer->setText("");
+    ui->Bt_Lancer->setIcon(QIcon(":/new/prefix1/images/icones/start.ico"));
+    ui->Bt_Lancer->setIconSize(QSize(30,30));
+    ui->Bt_Lancer->setCheckable(true);
+    ui->Bt_Lancer->setEnabled(false);
 
     //Met l'icone sur le bouton stopper
-    ui->btnEnregistrement->setText("");
-    ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/images/icones/rec.ico"));
-    ui->btnEnregistrement->setIconSize(QSize(30,30));
-    ui->btnEnregistrement->setCheckable(true);
+    ui->Bt_Enregistrement->setText("");
+    ui->Bt_Enregistrement->setIcon(QIcon(":/new/prefix1/images/icones/rec.ico"));
+    ui->Bt_Enregistrement->setIconSize(QSize(30,30));
+    ui->Bt_Enregistrement->setCheckable(true);
 
 
     //Gere le tableau (nombre de colonnes, taille, intitulé)
-    ui->tvValeurs->setColumnCount(1);
-    ui->tvValeurs->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->tvValeurs->setColumnWidth(0,215);
-    ui->tvValeurs->setHorizontalHeaderLabels(QStringList()<<"Valeur");
-    ui->tvValeurs->verticalHeader()->setFixedWidth(30);
+    ui->TbW_Valeurs->setColumnCount(1);
+    ui->TbW_Valeurs->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->TbW_Valeurs->setColumnWidth(0,215);
+    ui->TbW_Valeurs->setHorizontalHeaderLabels(QStringList()<<"Valeur");
+    ui->TbW_Valeurs->verticalHeader()->setFixedWidth(30);
 }
 
 F_Sonde::~F_Sonde()
@@ -63,30 +63,31 @@ F_Sonde::~F_Sonde()
     delete ui;
 }
 
-void F_Sonde::on_btnModeAcquisition_clicked()//Action lors du clique sur le bouton de mode d'acquisition
+
+void F_Sonde::on_Bt_ModeAcquisition_clicked()//Action lors du clique sur le bouton de mode d'acquisition
 {
-    if (ui->btnModeAcquisition->text() == "Automatique")//Si le texte du bouton est 'Automatique'
+    if (ui->Bt_ModeAcquisition->text() == "Automatique")//Si le texte du bouton est 'Automatique'
     {
         //Si choix de l'acquisition en automatique, rend non visibles les objets graphiques et change du texte du bouton
-        ui->btnModeAcquisition->setText("Manuel");
-        ui->tlDateHeure->hide();
-        ui->deDateAcquisition->hide();
-        ui->tiHeureAcquisition->hide();
-        ui->btnLancer->setEnabled(true);
+        ui->Bt_ModeAcquisition->setText("Manuel");
+        ui->Lb_DateHeure->hide();
+        ui->DtE_DateAcquisition->hide();
+        ui->TiE_HeureAcquisition->hide();
+        ui->Bt_Lancer->setEnabled(true);
 
     }
-    else if (ui->btnModeAcquisition->text() == "Manuel")//Si le texte du bouton est 'Manuel'
+    else if (ui->Bt_ModeAcquisition->text() == "Manuel")//Si le texte du bouton est 'Manuel'
     {
         //Si choix de l'acquisition en manuel, affichage des objets graphiques et changement du texte du bouton
-        ui->btnModeAcquisition->setText("Automatique");
-        ui->tlDateHeure->show();
-        ui->deDateAcquisition->show();
-        ui->tiHeureAcquisition->show();
-        ui->btnLancer->setEnabled(false);
+        ui->Bt_ModeAcquisition->setText("Automatique");
+        ui->Lb_DateHeure->show();
+        ui->DtE_DateAcquisition->show();
+        ui->TiE_HeureAcquisition->show();
+        ui->Bt_Lancer->setEnabled(false);
     }
 }
 
-void F_Sonde::on_btnLancer_clicked()//Action lorsque le bouton Lancer est appuyé
+void F_Sonde::on_Bt_Lancer_clicked()//Action lorsque le bouton Lancer est appuyé
 {
 
     //**************************ICONE******************************
@@ -96,19 +97,19 @@ void F_Sonde::on_btnLancer_clicked()//Action lorsque le bouton Lancer est appuy�
     if (bEtatLancer == true)
     {
         //Met l'icone sur le bouton stopper
-        ui->btnLancer->setText("");
-        ui->btnLancer->setIcon(QIcon(":/new/prefix1/images/icones/stop.ico"));
-        ui->btnLancer->setIconSize(QSize(30,30));
-        ui->btnLancer->setCheckable(true);
+        ui->Bt_Lancer->setText("");
+        ui->Bt_Lancer->setIcon(QIcon(":/new/prefix1/images/icones/stop.ico"));
+        ui->Bt_Lancer->setIconSize(QSize(30,30));
+        ui->Bt_Lancer->setCheckable(true);
         bEtatLancer = false;
     }
     else if (bEtatLancer == false)
     {
         //Met l'icone sur le bouton lancer
-        ui->btnLancer->setText("");
-        ui->btnLancer->setIcon(QIcon(":/new/prefix1/images/icones/start.ico"));
-        ui->btnLancer->setIconSize(QSize(30,30));
-        ui->btnLancer->setCheckable(true);
+        ui->Bt_Lancer->setText("");
+        ui->Bt_Lancer->setIcon(QIcon(":/new/prefix1/images/icones/start.ico"));
+        ui->Bt_Lancer->setIconSize(QSize(30,30));
+        ui->Bt_Lancer->setCheckable(true);
         bEtatLancer = true;
     }
     //******************************************************
@@ -116,13 +117,13 @@ void F_Sonde::on_btnLancer_clicked()//Action lorsque le bouton Lancer est appuy�
     //++++++++++++++++++++VERIFICATION+++++++++++++++++++
 
     //Verifie si une valeur a été rentrée dans les champs
-    if (ui->spIntervalle->value() == NULL || ui->leTpsAcquisition == NULL)
+    if (ui->SBx_Intervalle->value() == NULL || ui->LE_TpsAcquisition == NULL)
     {
         //Remet en place l'icone sur le bouton lancer
-        ui->btnLancer->setText("");
-        ui->btnLancer->setIcon(QIcon(":/new/prefix1/images/icones/start.ico"));
-        ui->btnLancer->setIconSize(QSize(30,30));
-        ui->btnLancer->setCheckable(true);
+        ui->Bt_Lancer->setText("");
+        ui->Bt_Lancer->setIcon(QIcon(":/new/prefix1/images/icones/start.ico"));
+        ui->Bt_Lancer->setIconSize(QSize(30,30));
+        ui->Bt_Lancer->setCheckable(true);
         bEtatLancer = true;
 
         //Affiche un message d'erreur
@@ -142,8 +143,8 @@ void F_Sonde::on_btnLancer_clicked()//Action lorsque le bouton Lancer est appuy�
     int nDureeTotale(0);
 
     //Calcul des temps d'acquisition et nombre de mesures
-    nIntervalle = ui->spIntervalle->value();
-    nDureeMesure = ui->leTpsAcquisition->text().toInt();
+    nIntervalle = ui->SBx_Intervalle->value();
+    nDureeMesure = ui->LE_TpsAcquisition->text().toInt();
     nDureeMesure = nDureeMesure*60;
     nDureeTotale = nDureeMesure/nIntervalle;
     /*qDebug()<<nIntervalle;
@@ -155,13 +156,13 @@ void F_Sonde::on_btnLancer_clicked()//Action lorsque le bouton Lancer est appuy�
         //Récupération de la données et affichage sur lecteur LCD
         Affichage = 30;//this->oArduino->LireCapteur("A10");
         qDebug()<< "Valeur : " <<Affichage;
-        ui->lcdValeur->display(Affichage);
+        ui->Lcd_Valeur->display(Affichage);
         //sleep(nIntervalle);
      //}
     //----------------------------------------------------
 }
 
-void F_Sonde::on_btnEnregistrement_clicked(bool checked)//Action lorsque le bouton Stopper est appuyé
+void F_Sonde::on_Bt_Enregistrement_clicked()//Action lorsque le bouton Stopper est appuyé
 {
     //************************ICONE*************************
     static bool bEtatRecup(true);
@@ -170,32 +171,32 @@ void F_Sonde::on_btnEnregistrement_clicked(bool checked)//Action lorsque le bout
     if (bEtatRecup == true)
     {
         //Met l'icone sur le bouton stopper
-        ui->btnEnregistrement->setText("");
-        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/images/icones/stop.ico"));
-        ui->btnEnregistrement->setIconSize(QSize(30,30));
-        ui->btnEnregistrement->setCheckable(true);
+        ui->Bt_Enregistrement->setText("");
+        ui->Bt_Enregistrement->setIcon(QIcon(":/new/prefix1/images/icones/stop.ico"));
+        ui->Bt_Enregistrement->setIconSize(QSize(30,30));
+        ui->Bt_Enregistrement->setCheckable(true);
         bEtatRecup = false;
     }
     else if (bEtatRecup == false)
     {
         //Met l'icone sur le bouton lancer
-        ui->btnEnregistrement->setText("");
-        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/images/icones/rec.ico"));
-        ui->btnEnregistrement->setIconSize(QSize(30,30));
-        ui->btnEnregistrement->setCheckable(true);
+        ui->Bt_Enregistrement->setText("");
+        ui->Bt_Enregistrement->setIcon(QIcon(":/new/prefix1/images/icones/rec.ico"));
+        ui->Bt_Enregistrement->setIconSize(QSize(30,30));
+        ui->Bt_Enregistrement->setCheckable(true);
         bEtatRecup = true;
     }
     //*****************************************************
 
     //++++++++++++++++++++++++++++VERIFICATION++++++++++++++++++++++++++++++++
 
-    if (ui->spIntervalle->value() == NULL || ui->leTpsAcquisition == NULL)
+    if (ui->SBx_Intervalle->value() == NULL || ui->LE_TpsAcquisition == NULL)
     {
         //Met l'icone sur le bouton lancer
-        ui->btnEnregistrement->setText("");
-        ui->btnEnregistrement->setIcon(QIcon(":/new/prefix1/images/icones/rec.ico"));
-        ui->btnEnregistrement->setIconSize(QSize(30,30));
-        ui->btnEnregistrement->setCheckable(true);
+        ui->Bt_Enregistrement->setText("");
+        ui->Bt_Enregistrement->setIcon(QIcon(":/new/prefix1/images/icones/rec.ico"));
+        ui->Bt_Enregistrement->setIconSize(QSize(30,30));
+        ui->Bt_Enregistrement->setCheckable(true);
         bEtatRecup = true;
 
         QMessageBox::about(this, tr("Erreur"),
@@ -213,8 +214,8 @@ void F_Sonde::on_btnEnregistrement_clicked(bool checked)//Action lorsque le bout
     int nDureeTotale(0);
 
     //Calcul des temps d'acquisition et nombre de mesures
-    nIntervalle = ui->spIntervalle->value();
-    nDureeMesure = ui->leTpsAcquisition->text().toInt();
+    nIntervalle = ui->SBx_Intervalle->value();
+    nDureeMesure = ui->LE_TpsAcquisition->text().toInt();
     nDureeMesure = nDureeMesure*60;
     nDureeTotale = nDureeMesure/nIntervalle;
     /*qDebug()<<nIntervalle;
@@ -227,13 +228,13 @@ void F_Sonde::on_btnEnregistrement_clicked(bool checked)//Action lorsque le bout
         //Récupération de la données et affichage sur lecteur LCD
         Affichage = this->oArduino->LireCapteur("A10");
         qDebug()<<Affichage;
-        ui->lcdValeur->display(Affichage);
-        ui->tvValeurs->setRowCount(nDureeTotale);
+        ui->Lcd_Valeur->display(Affichage);
+        ui->TbW_Valeurs->setRowCount(nDureeTotale);
 
         //Affichage de la valeur dans le tableau
         QString Var;
         QTableWidgetItem *item = new QTableWidgetItem(Var.setNum(Affichage));
-        ui->tvValeurs->setItem(0,0,item);
+        ui->TbW_Valeurs->setItem(0,0,item);
         //sleep(2);
 
     //}

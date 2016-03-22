@@ -22,11 +22,11 @@ class F_ChoisirSonde : public QDialog
             ~F_ChoisirSonde() ;                              // Destructeur
 
 private slots:
-    void on_CB_Interface_currentIndexChanged(int index);
+    void on_CBx_Interface_currentIndexChanged(int index);
 
-    void on_Btn_Annuler_clicked();
+    void on_Bt_Annuler_clicked();
 
-    void on_Btn_Valider_clicked();
+    void on_Bt_Valider_clicked();
 
 private:
             Ui::F_ChoisirSonde * ui ;        // Interface graphique
