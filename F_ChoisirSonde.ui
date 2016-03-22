@@ -42,7 +42,7 @@
        </property>
        <layout class="QGridLayout" name="LayListeCapteursEtActionneurs">
         <item row="0" column="0">
-         <widget class="QComboBox" name="CB_Interface">
+         <widget class="QComboBox" name="CBx_Interface">
           <property name="minimumSize">
            <size>
             <width>270</width>
@@ -93,12 +93,12 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QPushButton" name="Btn_Annuler">
+      <widget class="QPushButton" name="Bt_Annuler">
        <property name="text">
         <string>Annuler</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="icones.qrc">
          <normaloff>:/new/prefix1/images/icones/cross.ico</normaloff>:/new/prefix1/images/icones/cross.ico</iconset>
        </property>
        <property name="iconSize">
@@ -113,12 +113,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="Btn_Valider">
+      <widget class="QPushButton" name="Bt_Valider">
        <property name="text">
         <string>Valider</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="icones.qrc">
          <normaloff>:/new/prefix1/images/icones/check.ico</normaloff>:/new/prefix1/images/icones/check.ico</iconset>
        </property>
        <property name="iconSize">
@@ -140,6 +140,8 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="icones.qrc"/>
+ </resources>
  <connections/>
 </ui>
