@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>F_Sonde</class>
+ <widget class="QWidget" name="F_Sonde">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>373</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>373</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>9999</width>
+    <height>9999</height>
+   </size>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>400</width>
+    <height>373</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Acquisition</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QLCDNumber" name="Lcd_Valeur">
+     <property name="minimumSize">
+      <size>
+       <width>130</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="sizeIncrement">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>130</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="Lb_Valeur">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Valeur :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="21" column="1">
+    <widget class="QPushButton" name="Bt_Lancer">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="21" column="2">
+    <widget class="QPushButton" name="Bt_Enregistrement">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="Bt_ModeAcquisition">
+     <property name="text">
+      <string>Automatique</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" rowspan="21" colspan="2">
+    <widget class="QTableWidget" name="TbW_Valeurs">
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>37</number>
+     </attribute>
+     <attribute name="verticalHeaderMinimumSectionSize">
+      <number>25</number>
+     </attribute>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="Lb_Intervalle">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Durée entre 2 mesures (s):</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QSpinBox" name="SBx_Intervalle">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="0">
+    <widget class="QTimeEdit" name="TiE_HeureAcquisition"/>
+   </item>
+   <item row="13" column="0">
+    <widget class="QLabel" name="Lb_DateHeure">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Date et heure du début :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="0">
+    <widget class="QDateEdit" name="DtE_DateAcquisition"/>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="Lb_TpsAcquisition">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Temps d'acquisition :</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLineEdit" name="LE_TpsAcquisition"/>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
