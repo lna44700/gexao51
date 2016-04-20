@@ -29,7 +29,8 @@ private:
     Ui::F_Sonde *ui;
     Arduino *oArduino;
     QStandardItemModel *model = new QStandardItemModel;
-    QTimer MinuteurIntervalleMesures;
+    QTimer *MinuteurIntervalleMesures;
+    void Affichage();
 
 };
 

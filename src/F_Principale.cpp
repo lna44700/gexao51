@@ -43,9 +43,9 @@ F_Principale::F_Principale(QWidget *parent) :
     //Ajout de la led de détection de l'Arduino - Vert si détection, rouge sinon
     if(this->oMonArduino->Ouvrir() == true)
     {
-        sleep(1);
-        //Etat = this->oMonArduino->LirePort();
-        iconLbl->setPixmap(IconeVert);
+        sleep(1);//Laisse le temps à l'arduino de se synchroniser
+        //Etat = this->oMonArduino->LirePort();//Lit le port de l'arduino
+        iconLbl->setPixmap(IconeVert);//Met icone verte de détection
         texteLbl->setText("Arduino détecté !");
 
         ui->statusBar->addWidget(iconLbl);
@@ -55,7 +55,6 @@ F_Principale::F_Principale(QWidget *parent) :
     {
         iconLbl->setPixmap(IconeRouge);
         texteLbl->setText("Arduino non détecté !");
-        //Etat = texteLbl->text();
         ui->statusBar->addWidget(iconLbl);
         ui->statusBar->addWidget(texteLbl);
     }
