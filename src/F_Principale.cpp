@@ -91,7 +91,7 @@ void F_Principale::createChild() //action de création de la fenêtre enfant
 {
     this->ListeCapteurAnalogique = this->f_choix->ListeCapteurAnalogique;
     this->ListeCapteurComplete=this->ListeCapteurI2C+this->ListeCapteurAnalogique;
-    int test1;
+    int test2;
 
     F_Sonde *f_sonde = new F_Sonde(this->oMonArduino, static_cast<QWidget*>(ui->mdiArea)); // création d'une variable de type f_sonde
     f_sonde->setAttribute(Qt::WA_DeleteOnClose); //detruit le widget lors de la fermeture de l'évenement
