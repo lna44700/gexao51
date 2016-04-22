@@ -18,51 +18,32 @@ typedef enum {
 
 class ItemBroche : public QGraphicsItem
 {
+
 public:
-    ItemBroche(QString NomInterface, QSettings *Conf, QGraphicsItem* parent = 0); //Constructeur
 
-            void            paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget */*widget*/); //DEssine l'objet
-            QRectF          boundingRect() const; //Rectangle entourant l'objet
+    ItemBroche(QGraphicsItem* parent = 0); //Constructeur
 
-    inline  unsigned int    getId()         { return Id; }          //Accesseur de l'id
-    inline  QString         getNom()        { return NomBroche; }         //Accesseur du nom
-    inline  int             getBrocheNum()  { return BrocheNum; }   //Accesseur du numero de broche numérique
-    inline  int             getBrocheAna()  { return BrocheAna; }   //Accesseur du numero de broche analogique
-    inline  QStringList     getTypeBroche() { return TypeBroche; }  //Accesseur des types de broches
-
-            void            setId(unsigned int Id);                 //|Setters correspondant...
-            void            setNom(QString Nom);                    //|
-            void            setBrocheNum(int BrocheNum);            //|
-            void            setBrocheAna(int BrocheAna);            //|
-            void            setTypeBroche(QStringList TypeBroche);  //|
-
-            void            Enregistrer();
-            Capteur *NouveauCA;
-            Capteur* CapConnect;  //Capteur connecté à cette broche
-
-
-            Capteur* get_NouveauCA() const;
-
-protected:
-            void            dragEnterEvent(QGraphicsSceneDragDropEvent *event);     //Evenement d'entrée d'un drag dans l'item
-            void            dragLeaveEvent(QGraphicsSceneDragDropEvent *event);     //Evenement de sortie d'un drag
-            void            dropEvent(QGraphicsSceneDragDropEvent *event);          //Evenement de dépot
-            void            mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event);//Evenement de double click
-            void            contextMenuEvent(QGraphicsSceneContextMenuEvent * event);
-
-private:
-            void    DefinirCapteur(QString Mime); //Defninir le capteur
-
-    unsigned int    Id;
-    QString         NomBroche;
-    QString         NomInterface;
-    int             BrocheNum;
-    int             BrocheAna;
-    QStringList     TypeBroche;
-
+    void            paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget */*widget*/); //DEssine l'objet
+    void            setNom(QString Nom);                    //|
+    void            DefinirCapteur(QString NomCapteur, QString NomBroche); //Defninir le capteur
+    QRectF          boundingRect() const; //Rectangle entourant l'objet
+    Capteur         *CapConnect;  //Capteur connecté à cette broche
     TypeAccept      AcceptDrag;
 
-    QSettings* Conf;                //Config complete
+
+
+protected:
+
+    void            dragEnterEvent(QGraphicsSceneDragDropEvent *event);     //Evenement d'entrée d'un drag dans l'item
+    void            dragLeaveEvent(QGraphicsSceneDragDropEvent *event);     //Evenement de sortie d'un drag
+    void            dropEvent(QGraphicsSceneDragDropEvent *event);          //Evenement de dépot
+    void            mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event);//Evenement de double click
+    void            contextMenuEvent(QGraphicsSceneContextMenuEvent * event);
+
+private:
+
+    QString         NomBroche;
+
 };
 
 #endif // ITEMBROCHE_H

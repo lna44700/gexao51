@@ -1,4 +1,3 @@
-
 #include <QMouseEvent>
 #include <QStandardItemModel>
 #include <QApplication>
@@ -13,7 +12,7 @@ ListeCapteurVue::ListeCapteurVue(QWidget *parent) :
     this->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
-void ListeCapteurVue::mousePressEvent(QMouseEvent *   pEvent)
+void ListeCapteurVue::mousePressEvent(QMouseEvent * pEvent)
 {
     //Si c'est un appuis sur le click gauche, on sauvegarde sa position
     if(pEvent->button() == Qt::LeftButton)
@@ -23,7 +22,7 @@ void ListeCapteurVue::mousePressEvent(QMouseEvent *   pEvent)
     QListView::mousePressEvent(pEvent) ;
 }
 
-void ListeCapteurVue::mouseMoveEvent(QMouseEvent *    pEvent)
+void ListeCapteurVue::mouseMoveEvent(QMouseEvent * pEvent)
 {
     //Calcul les coordonnée du vecteur entre le point d'origine et la position actuelle, puis de sa longueur
     QPoint Vecteur  (pEvent->pos() - this->PosDebutDrag) ;

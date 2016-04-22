@@ -7,19 +7,22 @@ class Arduino
 {
 
 public:
+
     Arduino();
     ~Arduino();
-    bool Ouvrir();
-    bool Fermer();
-    void EcrirePort(QString Commande);
-    QByteArray LirePort();
-    int LireCapteur(QString Commande);
-    QSemaphore * Semaphore;
+
+    bool                Ouvrir();
+    bool                Fermer();
+    void                EcrirePort(QString Commande);
+    QByteArray          LirePort();
+    int                 LireCapteur(QString Commande);
+    QSemaphore          *Semaphore;
 
 private:
-    QextSerialPort * Port;
-    QByteArray Buffer;
-    QString NomPort;
+
+    QextSerialPort      *Port;
+    QByteArray          Buffer;
+    QString             NomPort;
 
 };
 

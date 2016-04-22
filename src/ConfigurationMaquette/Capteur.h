@@ -11,16 +11,16 @@ class Capteur
 {
 public:
     Capteur(QString NomCapteur, QString NomBroche);  //Constructeur
-    inline QPixmap getPhoto()   { return Photo; }   //Accesseur de la photo
 
-private:
-    QString Titre;
-    QString Commande;
-    QString Inconnue;
-    QString Expression;
-    QString Unit;
-    QString NomBroche;
-    QPixmap Photo;
+    inline QPixmap     getPhoto()   { return Photo; }   //Accesseur de la photo
+    QString            NomCapteur;
+    QString            NomBroche;
+    QString            Titre;
+    QString            Commande;
+    QString            Inconnue;
+    QString            Expression;
+    QString            Unite;
+    QPixmap            Photo;
 
 };
 

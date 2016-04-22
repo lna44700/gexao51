@@ -5,6 +5,9 @@
 #include <QMdiArea>
 #include "Arduino.h"
 #include <QSettings>
+#include "ConfigurationMaquette/Capteur.h"
+#include "F_ChoisirSonde.h"
+#include "F_SelectionSondes.h"
 
 namespace Ui {
 class F_Principale;
@@ -15,21 +18,28 @@ class F_Principale : public QMainWindow
     Q_OBJECT
 
 public:
+
     explicit F_Principale(QWidget *parent = 0);
     ~F_Principale();
+
     Arduino *oMonArduino;
-    bool Etat;
 
 private:
-    Ui::F_Principale *ui;
-    int DonneesLues;
-    QSettings Config;
-    QStringList Liste;
+    Ui::F_Principale  *ui;
+    int               DonneesLues;
+    QSettings         Config;
+    QStringList       Liste;
+    QList<Capteur*>   ListeCapteurI2C;
+    QList<Capteur*>   ListeCapteurAnalogique;
+    QList<Capteur*>   ListeCapteurComplete;
+    F_ChoisirSonde    *f_choix;
+    F_SelectionSondes *Selection;
 
 public slots:
     void displayAbout();
     void createChild();
-    void displaySelection();
+    void displayChoixSondes();
+    void displaySelectionSondes();
 
 private slots:
     void on_actionHeureDatePartout_triggered();

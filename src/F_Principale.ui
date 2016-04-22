@@ -46,6 +46,7 @@
     <addaction name="actionAcquisition"/>
     <addaction name="actionExporterDonnes"/>
     <addaction name="actionSauvegarderDonees"/>
+    <addaction name="actionSelection"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
@@ -176,6 +177,11 @@
     <string>Appliquer la même heure et date sur toutes les sondes</string>
    </property>
   </action>
+  <action name="actionSelection">
+   <property name="text">
+    <string>Selection</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="icones.qrc"/>
@@ -233,15 +239,31 @@
    <sender>actionChoixSondes</sender>
    <signal>triggered()</signal>
    <receiver>F_Principale</receiver>
-   <slot>displaySelection()</slot>
+   <slot>displayChoixSondes()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>376</x>
-     <y>231</y>
+     <x>439</x>
+     <y>259</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSelection</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>displaySelectionSondes()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>439</x>
+     <y>259</y>
     </hint>
    </hints>
   </connection>
@@ -249,6 +271,7 @@
  <slots>
   <slot>displayAbout()</slot>
   <slot>createChild()</slot>
-  <slot>displaySelection()</slot>
+  <slot>displaySelectionSondes()</slot>
+  <slot>displayChoixSondes()</slot>
  </slots>
 </ui>

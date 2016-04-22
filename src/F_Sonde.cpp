@@ -59,11 +59,6 @@ F_Sonde::F_Sonde(Arduino *oMonArduino, QWidget *parent) :
     ui->TbW_Valeurs->setHorizontalHeaderLabels(QStringList()<<"Valeur");
     ui->TbW_Valeurs->verticalHeader()->setFixedWidth(30);
 
-    MinuteurIntervalleMesures->setInterval(1000);
-
-    connect(MinuteurIntervalleMesures, SIGNAL(timeout()), this, SLOT(Affichage()));
-    this->MinuteurIntervalleMesures->start();
-
 
 }
 //=======================================================================================================================
@@ -154,7 +149,10 @@ void F_Sonde::on_Bt_Lancer_clicked()//Action lorsque le bouton Lancer est appuyÃ
         nDureeMesure = ui->LE_TpsAcquisition->text().toInt();
         nDureeMesure = nDureeMesure*60;
         nDureeTotale = nDureeMesure/nIntervalle;
+        //MinuteurIntervalleMesures->setInterval(1000)
 
+        //connect(MinuteurIntervalleMesures, SIGNAL(timeout()), this, SLOT(Affichage()));
+        //this->MinuteurIntervalleMesures->start();
 
     //-------------------------------FIN_AFFICHAGE-------------------------------
 

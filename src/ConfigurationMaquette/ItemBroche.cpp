@@ -12,13 +12,12 @@
 #include <QMessageBox>
 #include "F_ChoisirSonde.h"
 #include "ItemBroche.h"
+#include "Capteur.h"
 
-ItemBroche::ItemBroche(QString NomInterface, QSettings *Conf, QGraphicsItem *parent) :
+ItemBroche::ItemBroche(QGraphicsItem *parent) :
     QGraphicsItem   (parent),
-    NomInterface    (NomInterface),
     AcceptDrag      (NORMAL),
-    CapConnect      (0),
-    Conf            (Conf)
+    CapConnect      (NULL)
 {
     this->setAcceptDrops(true);
 }
@@ -26,7 +25,7 @@ ItemBroche::ItemBroche(QString NomInterface, QSettings *Conf, QGraphicsItem *par
 void ItemBroche::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget */*widget*/)
 {
     //Si aucun capteur n'est connecté
-    if(CapConnect == 0)
+    if(this->CapConnect == NULL)
     {
         //On dessine un cercle avec le nom de la broche
         QRectF rect (this->boundingRect());
@@ -40,12 +39,12 @@ void ItemBroche::paint(QPainter *painter, const QStyleOptionGraphicsItem */*opti
         QString         Texte;
 
         //Gestion de l'affichage en cas de drag
-        switch(AcceptDrag)
+        switch(this->AcceptDrag)
         {
         case NORMAL: //Cas normal, sans drag
             PremiereCouleur = QColor(0xFE, 0xFE, 0x98, 0xFF) ;
             SecondeCouleur  = QColor(0xC3, 0xC3, 0x67, 0xFF) ;
-            Texte           = NomBroche;
+            Texte           = this->NomBroche;
             break;
 
         case ACCEPT: //Cas si le drag est acceptable
@@ -94,15 +93,7 @@ void ItemBroche::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 
         QSettings Config("./IOCard/" + event->mimeData()->text().mid(4) + "/config.ini", QSettings::IniFormat);
 
-        //Si le drag est acceptable ou non sur cette broche
-        if(this->TypeBroche.contains(Config.value("PORT/Type").toString()))
-        {
-            this->AcceptDrag = ACCEPT;
-        }
-        else
-        {
-            this->AcceptDrag = REFUSE;
-        }
+        this->AcceptDrag = ACCEPT;
 
         //On update la vue
         QWidget* viewport = this->scene()->views().at(0)->viewport();
@@ -130,15 +121,19 @@ void ItemBroche::dropEvent(QGraphicsSceneDragDropEvent *event)
     if(event->mimeData()->text().left(3) == "Cap" && this->AcceptDrag == ACCEPT)
     {
         //S'il n'y a pas de capteur déjà connecté
-        if(CapConnect == 0)
+        if(this->CapConnect == NULL)
         {
-            this->DefinirCapteur(event->mimeData()->text().mid(4));
+            this->DefinirCapteur(event->mimeData()->text().mid(4), NomBroche);
+            QWidget* viewport = this->scene()->views().at(0)->viewport();
+            viewport->update();
         }
         else if(QMessageBox::question(0, "Modification", "Voulez vous écraser le capteur déjà installé?", QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
         {
             delete this->CapConnect;
-            this->CapConnect = 0;
-            this->DefinirCapteur(event->mimeData()->text().mid(4));
+            this->CapConnect = NULL;
+            this->DefinirCapteur(event->mimeData()->text().mid(4), this->NomBroche);
+            QWidget* viewport = this->scene()->views().at(0)->viewport();
+            viewport->update();
         }
     }
     else //Si le drag est initié de façon random par le systeme, on renvois vers la gestion parente
@@ -149,31 +144,28 @@ void ItemBroche::dropEvent(QGraphicsSceneDragDropEvent *event)
 
 void ItemBroche::mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event)
 {
-    if(this->CapConnect != 0)
+    if(this->CapConnect != NULL)
     {
         event->accept();
-        //f_DefinirActionsEtTests f_Modif(this->CapConnect, Conf);
-
-        //f_Modif.exec();
     }
 }
 
 void ItemBroche::contextMenuEvent(QGraphicsSceneContextMenuEvent * event)
 {
-    if(CapConnect != 0)
+    if(this->CapConnect != NULL)
     {
         //création du menu
         QMenu menu;
-        menu.addAction("Modifier");
+        //menu.addAction("Modifier");
         menu.addAction("Supprimer");
         menu.move(event->screenPos());
 
         //Exécution du menu et récupération de l'action choisie
-        QAction* selectedAction = menu.exec();
+        QAction *selectedAction = menu.exec();
 
 
         //Traitement de l'action en question
-        if(selectedAction != 0)
+        if(selectedAction != NULL)
         {
             if(selectedAction->text() == "Modifier")
             {
@@ -185,8 +177,9 @@ void ItemBroche::contextMenuEvent(QGraphicsSceneContextMenuEvent * event)
             {
                 if(QMessageBox::question(0, "Suppression", "Etes-vous sûr de supprimer cet élément?", QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
                 {
-                    delete CapConnect;
-                    CapConnect = 0;
+                    //delete CapConnect;
+                    //CapConnect = 0;
+                    CapConnect=NULL;
 
                     this->AcceptDrag = NORMAL;
 
@@ -200,38 +193,15 @@ void ItemBroche::contextMenuEvent(QGraphicsSceneContextMenuEvent * event)
     }
 }
 
-void ItemBroche::DefinirCapteur(QString NomCapteur)
+void ItemBroche::DefinirCapteur(QString NomCapteur, QString NomBroche)
 {
-    NouveauCA = NULL;
     //Création de l'objet capteur
-    NouveauCA = new Capteur(NomCapteur, NomBroche);
+    this->AcceptDrag = ACCEPT;
+    Capteur* NouveauCA = new Capteur(NomCapteur, NomBroche);
 
-    //Si on peut accepter le drop en fonction du type
-    if(TypeBroche.contains("AI"))
-    {
-        //On l'ajoute réellement et on update la vue
-        this->CapConnect = NouveauCA;
-        QWidget* viewport = this->scene()->views().at(0)->viewport();
-        viewport->update();
-    }
-    else
-    {
-       // delete NouveauCA; //Si le drop n'est pas acceptable, on delete le nouveau capteur
-    }
-}
+    //On l'ajoute réellement et on update la vue
+    this->CapConnect = NouveauCA;
 
-Capteur *ItemBroche::get_NouveauCA() const
-{
-    return this->NouveauCA;
-}
-
-
-void ItemBroche::setId(unsigned int Id)
-{
-    if( Id > 0)
-    {
-        this->Id = Id;
-    }
 }
 
 void ItemBroche::setNom(QString Nom)
@@ -242,19 +212,3 @@ void ItemBroche::setNom(QString Nom)
     }
 }
 
-void ItemBroche::setBrocheNum(int BrocheNum)
-{
-    if(BrocheNum > 0)
-        this->BrocheNum = BrocheNum;
-}
-
-void ItemBroche::setBrocheAna(int BrocheAna)
-{
-    if(BrocheAna >= -1)
-        this->BrocheAna = BrocheAna;
-}
-
-void ItemBroche::setTypeBroche(QStringList TypeBroche)
-{
-    this->TypeBroche = TypeBroche;
-}

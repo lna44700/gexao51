@@ -3,13 +3,10 @@
 #include <QDebug>
 
 Capteur::Capteur(QString NomCapteur, QString NomBroche) :
-    Photo   ("./IOCard/" + NomCapteur + "/photo.png")
+    Photo   ("./IOCard/" + NomCapteur + "/photo.png"),
+    NomCapteur(NomCapteur),
+    NomBroche(NomBroche)
 {
-    qDebug()<<NomCapteur;
-    qDebug()<<NomBroche;
-
-    //Broche
-    this->NomBroche = NomBroche;
 
     QSettings   Config("./IOCard/" + NomCapteur + "/config.ini", QSettings::IniFormat);
 
@@ -26,6 +23,15 @@ Capteur::Capteur(QString NomCapteur, QString NomBroche) :
     this->Expression = Config.value("SUP/Expression").toString();
 
     //Unit
-    this->Unit = Config.value("SUP/Unit").toString();
+    this->Unite = Config.value("SUP/Unit").toString();
 
+    if(this->NomBroche[0] == 'J')
+    {
+        this->NomBroche = this->NomBroche.remove(0,3);
+    }
+
+    if(this->NomBroche[0] == 'A')
+    {
+            this->NomBroche = this->NomBroche.remove(0,1);
+    }
 }

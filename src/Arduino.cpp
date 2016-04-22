@@ -1,17 +1,46 @@
+//-------------------------------------------------------------------------------
+/**
+ * @file        Arduino.cpp
+ * @brief       Connexion, détection, lecture et écriture de l'Arduino
+ *
+ * @author      S.GUICHARD
+ * @author      STS IRIS, Lycée Nicolas APPERT, ORVAULT (FRANCE)
+ * @since       1/02/16
+ * @version     1.0
+ * @date        20/04/16
+ *
+ * Cette classe va permettre que lorsque la maquette est déconnectée il y a possibilité
+ * de la reconnecter automatiquement. Elle va permettre également de communiquer avec l'Arduino.
+ *
+ * Fabrication  Gexao51.pro
+ */
+
+//=====   En-Têtes Personnels   =====
 #include "Arduino.h"
 #include "qextserialPort.h"
 #include "qextserialenumerator.h"
+
+//=====   En-Têtes standards    =====
 #include <QDebug>
 #include <QString>
 #include <unistd.h>
 
+//-------------------------------------------------------------------------------
+
+/**
+ * Constructeur par défaut.
+ */
 Arduino::Arduino():
     Semaphore()
-
 {
     this->Semaphore = new QSemaphore (1);
 }
 
+//-------------------------------------------------------------------------------
+
+/**
+ * Déstructeur.
+ */
 Arduino::~Arduino()
 {
     this->Port = NULL;
@@ -20,6 +49,15 @@ Arduino::~Arduino()
     this->NomPort = "";
 }
 
+//-------------------------------------------------------------------------------
+
+/**
+ * Cette méthode va permettre de détecter si un Arduino Méga 2560 est connecté sur un port USB.
+ * La méthode va également permettre l'ouverture du port afin de pouvoir communiquer avec le Shell Méga.
+ * @code
+ *     Ouvrir();
+ * @endcode
+ */
 bool Arduino::Ouvrir()
 {
 
@@ -56,7 +94,7 @@ bool Arduino::Ouvrir()
                 this->Port->setFlowControl (FLOW_OFF);           //Pas de contrôle de flux
 
                 //On ouvre la connexion avec l'arduino
-                Port->open(QextSerialPort::ReadWrite);
+                this->Port->open(QextSerialPort::ReadWrite);
 
                 //On test si la connexion avec l'arduino à réussie
                 if(this->Port->isOpen())
@@ -80,6 +118,14 @@ bool Arduino::Ouvrir()
     return bRetour;
 }
 
+//-------------------------------------------------------------------------------
+
+/**
+ * Cette méthode va permettre de fermer le port.
+ * @code
+ *     Fermer();
+ * @endcode
+ */
 bool Arduino::Fermer()
 {
     bool bRetour (false);
@@ -101,6 +147,15 @@ bool Arduino::Fermer()
     return bRetour;
 }
 
+//-------------------------------------------------------------------------------
+
+/**
+ * Cette méthode va permettre d'écrire sur le port série la commande reçu en paramètre.
+ * @code
+ *    EcrirePort("A10");
+ * @endcode
+ * @param Commande Commande à écrire sur le port permettant d'interroger le Shell Méga sur l'une de ses broches.
+ */
 void Arduino::EcrirePort(QString Commande)
 {
     //Si le port série est ouvert
@@ -115,6 +170,15 @@ void Arduino::EcrirePort(QString Commande)
     }
 }
 
+//-------------------------------------------------------------------------------
+
+/**
+ * Cette méthode va permettre de lire sur le port les données envoyées par le Shell Méga.
+ * @code
+ *    LirePort();
+ * @endcode
+ * @return QByteArray Buffer, retourne un buffer contenant les données lues sur le port.
+ */
 QByteArray Arduino::LirePort()
 {
     //Si le port série est ouvert
@@ -131,11 +195,21 @@ QByteArray Arduino::LirePort()
     return this->Buffer;
 }
 
+//-------------------------------------------------------------------------------
+
+/**
+ * Cette méthode va permettre d'interpréter les données reçu par le Shell Méga en récupérant la valeur du capteur.
+ * @code
+ *    LireCapteur("A10");
+ * @endcode
+ * @param Commande Commande à écrire sur le port permettant d'interroger le Shell Méga sur l'une de ses broches.
+ * @return int Retour, retourne la valeur du capteur.
+ */
 int Arduino::LireCapteur(QString Commande)
 {
 
     //Acquisition du sémaphore
-    Semaphore->acquire(1);
+    this->Semaphore->acquire(1);
 
     QByteArray RetourLecturePort("");
     QString DonneesLues("");
@@ -205,7 +279,7 @@ int Arduino::LireCapteur(QString Commande)
     }
 
     //On libère le sémaphore
-    Semaphore->release(1);
+    this->Semaphore->release(1);
 
     return Retour;
 }

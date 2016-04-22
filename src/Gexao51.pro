@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2016-02-26T23:57:03
+# Project created by QtCreator 2016-04-21T21:24:09
 #
 #-------------------------------------------------
 
@@ -18,6 +18,7 @@ SOURCES += main.cpp\
     Arduino.cpp \
     F_Sonde.cpp \
     F_ChoisirSonde.cpp \
+    F_SelectionSondes.cpp \
     ConfigurationMaquette/ListeCapteurVue.cpp \
     ConfigurationMaquette/ScenePlanDeCablage.cpp \
     ConfigurationMaquette/ItemBroche.cpp \
@@ -27,19 +28,22 @@ SOURCES += main.cpp\
 
 HEADERS  += F_Principale.h \
     Arduino.h \
-    F_Sonde.h \
     F_ChoisirSonde.h \
+    F_SelectionSondes.h \
+    F_Sonde.h \
     ConfigurationMaquette/ListeCapteurVue.h \
     ConfigurationMaquette/ScenePlanDeCablage.h \
     ConfigurationMaquette/ItemBroche.h \
     ConfigurationMaquette/Photo.h \
     ConfigurationMaquette/Capteur.h \
-    TypeCommun.h \
+    TypeCommun.h
 
 FORMS    += \
     F_Principale.ui \
+    F_ChoisirSonde.ui \
+    F_SelectionSondes.ui \
     F_Sonde.ui \
-    F_ChoisirSonde.ui
+
 
 DISTFILES +=
 
