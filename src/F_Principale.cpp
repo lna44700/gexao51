@@ -1,7 +1,29 @@
+/**
+ * @file        F_Principale.cpp
+ * @brief       Création de la fenêtre principale du programme
+ *
+ * @author      S.GUICHARD
+ * @author      S.MENARD
+ * @author      STS IRIS, Lycée Nicolas APPERT, ORVAULT (FRANCE)
+ * @since       1/02/16
+ * @version     1.0
+ * @date        27/04/16
+ *
+ * Lors de l'appel au constructeur de la classe, la création de la fenêtre principale du programme contenant
+ * les différentes barres (outil, menu, état) et la zone permettant l'accueil de la fenêtre enfant.
+ * S'occupe également d'ouvrir la communication entre l'Arduino et le programme.
+ * Enfin, contient également les déclarations des différentes fenêtres de choix et de sélections des sondes.
+ *
+ * Fabrication  Gexao51.pro
+ */
+
+//=====   En-Têtes Personnels   =====
 #include "F_Principale.h"
 #include "ui_F_Principale.h"
-#include <F_Sonde.h>
+#include "F_Sonde.h"
 #include "F_ChoisirSonde.h"
+
+//=====   En-Têtes standards    =====
 #include <QtGui>
 #include <QMdiArea>
 #include <QMdiSubWindow>
@@ -13,53 +35,59 @@
 #include <QFileDialog>
 #include <QWidget>
 #include <QGraphicsView>
+#include <QListWidgetItem>
 
+
+/**
+ * Constructeur par défaut.
+ */
 F_Principale::F_Principale(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::F_Principale),
-    DonneesLues(0)//à enlever quand f_sonde sera terminée
+    nDonneesLues(0)//à enlever quand f_sonde sera terminée
 { 
     ui->setupUi(this);
 
     //Ajout de l'icone de l'application
-    QIcon icon(":/new/prefix1/images/icones/icone_g_key.ico");
-    QWidget::setWindowIcon(icon);
+    QIcon icApplication(":/new/prefix1/images/icones/icone_g_key.ico");
+    QWidget::setWindowIcon(icApplication);
 
     //Définition des icones et texte pour la détection de l'Arduino
-    QLabel *iconLbl = new QLabel;
-    QLabel *texteLbl = new QLabel;
-    QPixmap IconeVert(":/new/prefix1/images/icones/led_verte_red.ico");
-    QPixmap IconeRouge(":/new/prefix1/images/icones/led_rouge_red.ico");
+    QLabel *lbBarreStatutIcone = new QLabel;
+    QLabel *lbBarreStatutLabel = new QLabel;
+    QPixmap pmIconeVert(":/new/prefix1/images/icones/led_verte_red.ico");
+    QPixmap pmIconeRouge(":/new/prefix1/images/icones/led_rouge_red.ico");
 
     this->oMonArduino = new Arduino;
 
     /*this->oMonArduino->Ouvrir();
+    this->oMonArduino->LirePort();
     sleep(1);*/
 
     //Lecture du port pour lire le nom
 
 
-    /*this->DonneesLues = oMonArduino->LireCapteur("A10");
-    qDebug() << this->DonneesLues;*/
+    /*this->nDonneesLues = oMonArduino->LireCapteur("A10");
+    qDebug() << this->nDonneesLues;*/
 
     //Ajout de la led de détection de l'Arduino - Vert si détection, rouge sinon
     if(this->oMonArduino->Ouvrir() == true)
     {
         sleep(1);
         //this->oMonArduino->LirePort();
-        iconLbl->setPixmap(IconeVert);
-        texteLbl->setText("Arduino détectée !");
-        ui->statusBar->addWidget(iconLbl);
-        ui->statusBar->addWidget(texteLbl);
+        lbBarreStatutIcone->setPixmap(pmIconeVert);
+        lbBarreStatutLabel->setText("Arduino détecté !");
+        ui->BarreStatut->addWidget(lbBarreStatutIcone);
+        ui->BarreStatut->addWidget(lbBarreStatutLabel);
         sleep(1);
 
     }
     else
     {
-        iconLbl->setPixmap(IconeRouge);
-        texteLbl->setText("Arduino non détectée !");
-        ui->statusBar->addWidget(iconLbl);
-        ui->statusBar->addWidget(texteLbl);
+        lbBarreStatutIcone->setPixmap(pmIconeRouge);
+        lbBarreStatutLabel->setText("Arduino non détecté !");
+        ui->BarreStatut->addWidget(lbBarreStatutIcone);
+        ui->BarreStatut->addWidget(lbBarreStatutLabel);
         ui->actionChoixSondes->setEnabled(false);
     }
 
@@ -68,12 +96,19 @@ F_Principale::F_Principale(QWidget *parent) :
     this->ListeCapteurI2C = this->f_choix->ListeCapteurI2C;
 }
 
+/**
+ * Déstructeur de la classe
+ */
 F_Principale::~F_Principale()
 {
     delete ui;
 }
 
-void F_Principale::displayAbout() //action qui affiche un message en pop-up
+/**
+ * Cette méthode va permettre l'affichage de la fenêtre "A propos" lors de l'appui sur le bouton
+ * Elle donnera des informations sur les développeurs de l'application, et des liens vers les sources d'images.
+ */
+void F_Principale::FenetreAPropos() //action qui affiche un message en pop-up
 {
     QMessageBox::about(this, tr("À propos"),
     tr("<p>Ce logiciel a été développé par : <br/> Sylvain GUICHARD et Sylvain MENARD, étudiants au Lycée Nicolas Appert à Orvault "
@@ -87,16 +122,21 @@ void F_Principale::displayAbout() //action qui affiche un message en pop-up
        "<br/> <br/> Version 0.01</p>")); // le message qui doit s'afficher
 }
 
-void F_Principale::createChild() //action de création de la fenêtre enfant
+/**
+ * Cette méthode va permettre l'affichage de la fenêtre enfant dans la zone MDI de l'application.
+ */
+void F_Principale::FenetreEnfant() //action de création de la fenêtre enfant
 {
-    this->ListeCapteurAnalogique = this->f_choix->ListeCapteurAnalogique;
-    this->ListeCapteurComplete=this->ListeCapteurI2C+this->ListeCapteurAnalogique;
-    int test2;
 
-    F_Sonde *f_sonde = new F_Sonde(this->oMonArduino, static_cast<QWidget*>(ui->mdiArea)); // création d'une variable de type f_sonde
-    f_sonde->setAttribute(Qt::WA_DeleteOnClose); //detruit le widget lors de la fermeture de l'évenement
-    ui->mdiArea->addSubWindow(f_sonde); // ajoute la fenêtre enfant f_sonde à la fenêtre MDI
-    f_sonde->show(); // affiche la fenêtre enfant
+
+    F_Sonde *oFenetreSonde = new F_Sonde(this->oMonArduino, static_cast<QWidget*>(ui->ZoneMDI)); // création d'une variable de type f_sonde
+    oFenetreSonde->setAttribute(Qt::WA_DeleteOnClose); //detruit le widget lors de la fermeture de l'évenement
+    ui->ZoneMDI->addSubWindow(oFenetreSonde); // ajoute la fenêtre enfant f_sonde à la fenêtre MDI
+    oFenetreSonde->show(); // affiche la fenêtre enfant
+
+    QListWidgetItem *Sonde = new QListWidgetItem(oFenetreSonde->windowTitle(), ui->LW_ListeSondes);
+    Sonde->setFlags(Sonde->flags() | Qt::ItemIsUserCheckable); // set checkable flag
+    Sonde->setCheckState(Qt::Unchecked); // AND initialize check state
 }
 
 void F_Principale::displayChoixSondes()//action d'affichage fenêtre de séléction des sondes
@@ -113,8 +153,8 @@ void F_Principale::displaySelectionSondes()
 //Affiche la même heure et date partout sur la base de la première fenêtre
 void F_Principale::on_actionHeureDatePartout_triggered()
 {
-    /*ui->mdiArea->sub
-    foreach (F_Sonde *f_sonde, ui->mdiArea)
+    /*ui->ZoneMDI->sub
+    foreach (F_Sonde *f_sonde, ui->ZoneMDI)
     {
         f_sonde->
     }*/

@@ -8,9 +8,9 @@ F_SelectionSondes::F_SelectionSondes(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QListWidgetItem* item = new QListWidgetItem("item", ui->LW_ListeSondes);
-    item->setFlags(item->flags() | Qt::ItemIsUserCheckable); // set checkable flag
-    item->setCheckState(Qt::Unchecked); // AND initialize check state
+    QListWidgetItem *Sonde = new QListWidgetItem("Test", ui->LW_ListeSondes);
+    Sonde->setFlags(Sonde->flags() | Qt::ItemIsUserCheckable); // set checkable flag
+    Sonde->setCheckState(Qt::Unchecked); // AND initialize check state
 }
 
 F_SelectionSondes::~F_SelectionSondes()

@@ -26,7 +26,7 @@ public:
 
 private:
     Ui::F_Principale  *ui;
-    int               DonneesLues;
+    int               nDonneesLues;
     QSettings         Config;
     QStringList       Liste;
     QList<Capteur*>   ListeCapteurI2C;
@@ -35,16 +35,17 @@ private:
     F_ChoisirSonde    *f_choix;
     F_SelectionSondes *Selection;
 
-public slots:
-    void displayAbout();
-    void createChild();
-    void displayChoixSondes();
-    void displaySelectionSondes();
+
 
 private slots:
     void on_actionHeureDatePartout_triggered();
     void on_actionOuvrir_triggered();
     void on_actionSauvegarder_triggered();
+
+    void FenetreAPropos();
+    void FenetreEnfant();
+    void displayChoixSondes();
+    void displaySelectionSondes();
 };
 
 #endif // F_PRINCIPALE_H

@@ -6,6 +6,12 @@
 #include <QStandardItem>
 #include <QTimer>
 
+#include <fstream>
+#include <iostream>
+#include <unistd.h>
+
+using namespace std;
+
 namespace Ui {
 class F_Sonde;
 }
@@ -25,12 +31,26 @@ private slots:
 
     void on_Bt_Enregistrement_clicked();
 
+    void Affichage();
+
+    void Sauvegarde();
+
 private:
     Ui::F_Sonde *ui;
     Arduino *oArduino;
     QStandardItemModel *model = new QStandardItemModel;
-    QTimer *MinuteurIntervalleMesures;
-    void Affichage();
+    QTimer *tmMinuteurIntervalleMesuresAffichage;
+    QTimer *tmMinuteurIntervalleMesuresSauvegarde;
+    int nDureeMesure;
+    int nDureeTotale;
+    int nIntervalle;
+    bool bEtatLancer;
+    bool bEtatRecup;
+    unsigned int nCompteurSauvegarde;
+    unsigned int nCompteurAffichage;
+    ofstream fpFichierDonnees;
+    QSemaphore *Semaphore;
+
 
 };
 

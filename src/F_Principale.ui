@@ -6,26 +6,55 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>880</width>
-    <height>520</height>
+    <width>879</width>
+    <height>513</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Gexao51</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QMdiArea" name="mdiArea"/>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QListWidget" name="LW_ListeSondes">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QMdiArea" name="ZoneMDI">
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>0</height>
+       </size>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QMenuBar" name="BarreMenu">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>880</width>
+     <width>879</width>
      <height>21</height>
     </rect>
    </property>
@@ -58,8 +87,8 @@
    <addaction name="menuDonnees"/>
    <addaction name="menuAide"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QToolBar" name="toolBar">
+  <widget class="QStatusBar" name="BarreStatut"/>
+  <widget class="QToolBar" name="BarreOutils">
    <property name="enabled">
     <bool>true</bool>
    </property>
@@ -123,7 +152,7 @@
     <string>Choix des sondes</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+C</string>
+    <string>Ctrl+T</string>
    </property>
   </action>
   <action name="actionQuitter">
@@ -207,7 +236,7 @@
    <sender>actionAcquisition</sender>
    <signal>triggered()</signal>
    <receiver>F_Principale</receiver>
-   <slot>createChild()</slot>
+   <slot>FenetreEnfant()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -223,7 +252,7 @@
    <sender>actionAPropos</sender>
    <signal>triggered()</signal>
    <receiver>F_Principale</receiver>
-   <slot>displayAbout()</slot>
+   <slot>FenetreAPropos()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -269,8 +298,8 @@
   </connection>
  </connections>
  <slots>
-  <slot>displayAbout()</slot>
-  <slot>createChild()</slot>
+  <slot>FenetreAPropos()</slot>
+  <slot>FenetreEnfant()</slot>
   <slot>displaySelectionSondes()</slot>
   <slot>displayChoixSondes()</slot>
  </slots>
