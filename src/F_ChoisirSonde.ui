@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>F_ChoisirSonde</class>
+ <widget class="QDialog" name="F_ChoisirSonde">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1131</width>
+    <height>553</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Réalisation du plan de câblage</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/Images/App/icons_simple.png</normaloff>:/Images/App/icons_simple.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="Lay_1">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QGroupBox" name="GrpBx_Capteur">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="title">
+        <string>Liste des capteurs</string>
+       </property>
+       <layout class="QGridLayout" name="LayListeCapteursEtActionneurs">
+        <item row="0" column="0">
+         <widget class="QComboBox" name="CBx_Interface">
+          <property name="minimumSize">
+           <size>
+            <width>270</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGraphicsView" name="Vue">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>621</width>
+         <height>485</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>621</width>
+         <height>485</height>
+        </size>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QAbstractScrollArea::AdjustIgnored</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
+       <property name="renderHints">
+        <set>QPainter::Antialiasing|QPainter::HighQualityAntialiasing|QPainter::SmoothPixmapTransform|QPainter::TextAntialiasing</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="Lay_2">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="Bt_Supprimer">
+       <property name="text">
+        <string>Supprimer</string>
+       </property>
+       <property name="icon">
+        <iconset resource="icones.qrc">
+         <normaloff>:/new/prefix1/images/icones/cross.ico</normaloff>:/new/prefix1/images/icones/cross.ico</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Bt_Valider">
+       <property name="text">
+        <string>Valider</string>
+       </property>
+       <property name="icon">
+        <iconset resource="icones.qrc">
+         <normaloff>:/new/prefix1/images/icones/check.ico</normaloff>:/new/prefix1/images/icones/check.ico</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="icones.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>Bt_Supprimer</sender>
+   <signal>clicked()</signal>
+   <receiver>F_ChoisirSonde</receiver>
+   <slot>on_ActionSupprimer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>286</x>
+     <y>522</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>565</x>
+     <y>276</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Bt_Valider</sender>
+   <signal>clicked()</signal>
+   <receiver>F_ChoisirSonde</receiver>
+   <slot>on_ActionValider()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>844</x>
+     <y>522</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>565</x>
+     <y>276</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>CBx_Interface</sender>
+   <signal>activated(int)</signal>
+   <receiver>F_ChoisirSonde</receiver>
+   <slot>on_ComboBoxInterface(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>251</x>
+     <y>258</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>565</x>
+     <y>276</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>on_ActionValider()</slot>
+  <slot>on_ActionSupprimer()</slot>
+  <slot>on_ComboBoxInterface(int)</slot>
+ </slots>
+</ui>

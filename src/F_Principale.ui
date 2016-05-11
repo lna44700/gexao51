@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>F_Principale</class>
+ <widget class="QMainWindow" name="F_Principale">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>879</width>
+    <height>513</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Gexao51</string>
+  </property>
+  <widget class="QWidget" name="CtrW">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
+     <widget class="QListWidget" name="LiW_ListeSondes">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="Lb_ListeSonde">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Liste des sondes :</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" rowspan="2">
+     <widget class="QMdiArea" name="MdiA_ZoneMDI">
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="MnBr">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>879</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="Mn_Fichier">
+    <property name="title">
+     <string>Fichier</string>
+    </property>
+    <addaction name="Act_Charger"/>
+    <addaction name="Act_Sauvegarder"/>
+    <addaction name="Act_ChoixSondes"/>
+    <addaction name="Act_Calibrage"/>
+    <addaction name="separator"/>
+    <addaction name="Act_Quitter"/>
+   </widget>
+   <widget class="QMenu" name="Mn_Donnees">
+    <property name="title">
+     <string>Données</string>
+    </property>
+    <addaction name="Act_Acquisition"/>
+    <addaction name="Act_ExporterDonnes"/>
+    <addaction name="Act_SauvegarderDonees"/>
+   </widget>
+   <widget class="QMenu" name="Mn_Aide">
+    <property name="title">
+     <string>Aide</string>
+    </property>
+    <addaction name="Act_APropos"/>
+   </widget>
+   <addaction name="Mn_Fichier"/>
+   <addaction name="Mn_Donnees"/>
+   <addaction name="Mn_Aide"/>
+  </widget>
+  <widget class="QStatusBar" name="StBr"/>
+  <widget class="QToolBar" name="TlBr">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="Act_LancerTous"/>
+   <addaction name="Act_StopperTous"/>
+   <addaction name="separator"/>
+   <addaction name="Act_SauvegarderPartout"/>
+   <addaction name="Act_StopperSauvegardePartout"/>
+   <addaction name="separator"/>
+   <addaction name="Act_ParametresPartout"/>
+   <addaction name="Act_HeureDatePartout"/>
+  </widget>
+  <action name="Act_Charger">
+   <property name="text">
+    <string>Ouvrir paramètres d'acquisition</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="Act_Sauvegarder">
+   <property name="text">
+    <string>Sauvegarder paramètres d'acquisition</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="Act_ExporterDonnes">
+   <property name="text">
+    <string>Exporter les données</string>
+   </property>
+  </action>
+  <action name="Act_SauvegarderDonees">
+   <property name="text">
+    <string>Sauvegarder les données</string>
+   </property>
+  </action>
+  <action name="Act_ChoixSondes">
+   <property name="text">
+    <string>Choix des sondes</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="Act_Quitter">
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="Act_Acquisition">
+   <property name="text">
+    <string>Acquisition</string>
+   </property>
+  </action>
+  <action name="Act_APropos">
+   <property name="text">
+    <string>À propos</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F1</string>
+   </property>
+  </action>
+  <action name="Act_LancerTous">
+   <property name="icon">
+    <iconset resource="icones.qrc">
+     <normaloff>:/new/prefix1/images/icones/start_all.ico</normaloff>:/new/prefix1/images/icones/start_all.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Lancer toutes les sondes</string>
+   </property>
+   <property name="toolTip">
+    <string>Demarrer l'acquisition de toutes les sondes</string>
+   </property>
+  </action>
+  <action name="Act_StopperTous">
+   <property name="icon">
+    <iconset resource="icones.qrc">
+     <normaloff>:/new/prefix1/images/icones/stop_all.ico</normaloff>:/new/prefix1/images/icones/stop_all.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Stopper l'acquisition de toutes les sondes</string>
+   </property>
+  </action>
+  <action name="Act_HeureDatePartout">
+   <property name="icon">
+    <iconset resource="icones.qrc">
+     <normaloff>:/new/prefix1/images/icones/date_clock.ico</normaloff>:/new/prefix1/images/icones/date_clock.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Appliquer la même heure et date sur toutes les sondes</string>
+   </property>
+  </action>
+  <action name="Act_Calibrage">
+   <property name="text">
+    <string>Calibrage</string>
+   </property>
+  </action>
+  <action name="Act_SauvegarderPartout">
+   <property name="icon">
+    <iconset resource="icones.qrc">
+     <normaloff>:/new/prefix1/images/icones/rec_all.ico</normaloff>:/new/prefix1/images/icones/rec_all.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Sauvegarde toutes les sondes</string>
+   </property>
+   <property name="toolTip">
+    <string>Demarrer la sauvegarde de toutes les sondes</string>
+   </property>
+  </action>
+  <action name="Act_StopperSauvegardePartout">
+   <property name="icon">
+    <iconset resource="icones.qrc">
+     <normaloff>:/new/prefix1/images/icones/stop_rec_all.ico</normaloff>:/new/prefix1/images/icones/stop_rec_all.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Stopper la sauvegarde de toutes les sondes</string>
+   </property>
+   <property name="toolTip">
+    <string>Stopper la sauvegarde de toutes les sondes</string>
+   </property>
+  </action>
+  <action name="Act_ParametresPartout">
+   <property name="icon">
+    <iconset resource="icones.qrc">
+     <normaloff>:/new/prefix1/images/icones/param_all.ico</normaloff>:/new/prefix1/images/icones/param_all.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Appliquer les memes parametres d'acquisition sur toutes les sondes</string>
+   </property>
+   <property name="toolTip">
+    <string>Appliquer les memes parametres d'acquisition sur toutes les sondes</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="icones.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>Act_Quitter</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>376</x>
+     <y>231</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Act_Acquisition</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>on_FenetreAcquisition()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>376</x>
+     <y>231</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Act_APropos</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>on_FenetreAPropos()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>376</x>
+     <y>231</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Act_ChoixSondes</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>on_FenetreChoixSonde()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>439</x>
+     <y>259</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Act_Calibrage</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>on_FenetreListeCalibrage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>439</x>
+     <y>259</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Act_Charger</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>on_FenetreCharger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>439</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Act_Sauvegarder</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>on_FenetreSauvegarder()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>439</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Act_LancerTous</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>on_LancerPartout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>439</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Act_StopperTous</sender>
+   <signal>triggered()</signal>
+   <receiver>F_Principale</receiver>
+   <slot>on_StopperPartout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>439</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>on_FenetreAPropos()</slot>
+  <slot>on_FenetreAcquisition()</slot>
+  <slot>on_FenetreChoixSonde()</slot>
+  <slot>on_FenetreSauvegarder()</slot>
+  <slot>on_FenetreCharger()</slot>
+  <slot>on_FenetreListeCalibrage()</slot>
+  <slot>on_LancerPartout()</slot>
+  <slot>on_HeureDatePartout()</slot>
+  <slot>on_StopperPartout()</slot>
+  <slot>on_SauvegardePartout()</slot>
+  <slot>on_StopperSauvegardePartout()</slot>
+  <slot>on_ParametresPartout()</slot>
+ </slots>
+</ui>
